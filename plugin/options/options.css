@@ -1,0 +1,25 @@
+button, input, label {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  width: 100%;
+}
+
+.field {
+  padding-bottom: 10px;
+}
+
+.label-text {
+  padding-bottom: 2px;
+}
+
+button, input {
+  padding: 6px;
+}
+
+button {
+  margin-top: 8px;
+}
+
+input[type=checkbox] {
+  width: auto;
+}

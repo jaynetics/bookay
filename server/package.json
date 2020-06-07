@@ -1,0 +1,39 @@
+{
+  "name": "bookay-server",
+  "version": "1.0.0",
+  "description": "bookay-server",
+  "main": "server.js",
+  "scripts": {
+    "postinstall": "sequelize-cli db:migrate",
+    "pretest": "rm -f ./config/test_db.sqlite && env NODE_ENV=test sequelize-cli db:migrate",
+    "start": "node server.js",
+    "start:integration": "npm run pretest && env NODE_ENV=test PORT=3033 node server.js",
+    "test": "jest --runInBand",
+    "testw": "jest --runInBand --watch"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./tests/setupTests.js"
+    ]
+  },
+  "repository": "https://github.com/jaynetics/bookay",
+  "author": "Janosch Müller",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
+    "bookmarks-parser": "^1.5.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-sequelize-crud": "^5.0.0",
+    "heroku-ssl-redirect": "0.0.4",
+    "pg": "^8.2.1",
+    "sequelize": "^5.21.8",
+    "sequelize-cli": "^5.5.1"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1",
+    "sqlite3": "^4.2.0",
+    "supertest": "^4.0.2"
+  }
+}

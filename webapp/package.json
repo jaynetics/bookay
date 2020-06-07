@@ -1,0 +1,39 @@
+{
+  "name": "bookay-webapp",
+  "version": "1.0.0",
+  "description": "bookay-webapp",
+  "main": "src/index.js",
+  "author": "Janosch Müller",
+  "repository": "https://github.com/jaynetics/bookay",
+  "license": "MIT",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && ./scripts/sync-build.sh",
+    "test": "react-scripts test --watchAll=false",
+    "testw": "react-scripts test"
+  },
+  "browserslist": {
+    "production": [
+      ">2%"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "history": "^4.10.1",
+    "performant-array-to-tree": "^1.7.1",
+    "preact": "^10.4.1",
+    "preact-router": "^3.2.1",
+    "react-scripts": "^3.4.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-preact-pure": "^2.2.0",
+    "fetch-mock-jest": "^1.3.0",
+    "node-fetch": "^2.6.0"
+  }
+}
