@@ -33,6 +33,7 @@ context('Mobile view', () => {
       win.postMessage({ testEvent: 'touchstart', target: 'Folder 1' }, null)
       win.postMessage({ testEvent: 'touchend', target: 'Folder 1' }, null)
     })
+    cy.item('Folder 1').click()
     cy.shouldHaveItem('Inner folder')
   })
 })
