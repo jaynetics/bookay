@@ -3,10 +3,10 @@ const request = require('supertest')
 const { User } = require('../models')
 
 describe('POST /api/users', () => {
-  it('should return 403 without logged in user', async () => {
+  it('should return 401 without logged in user', async () => {
     const response = await request(app).post('/api/users')
       .send({ username: 'new user', password: 'xy', ownPassword: 'pw' })
-    expect(response.status).toBe(403)
+    expect(response.status).toBe(401)
     expect(await User.count({ where: { username: 'new user' } })).toBe(0)
   })
 
