@@ -1,13 +1,16 @@
 {
   "name": "bookay",
-  "version": "1.0.0",
   "description": "NOTE: this package.json is just an entrypoint for tests and deployment. For development, check subfolders.",
+  "engines": {
+    "node": "^14.1"
+  },
   "scripts": {
     "build": "npm --prefix server install && npm --prefix webapp install && npm --prefix webapp run build",
     "pretest": "npm run build && npm --prefix test install",
     "start": "node server/server.js",
     "test": "npm --prefix webapp test && npm --prefix server test && npm --prefix test test"
   },
+  "version": "1.0.0",
   "repository": "https://github.com/jaynetics/bookay",
   "author": "Janosch Müller",
   "license": "MIT"
