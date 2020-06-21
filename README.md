@@ -11,7 +11,9 @@ However, if you use multiple browsers, or switch your browser from time to time,
 ## Features
 
 - easy deployment
-- nested folders
+- customizable browser plugin
+- lightweight web app
+- support for nested folders
 - data import and export
 - scan for dupes and broken links
 - multiple users per instance
