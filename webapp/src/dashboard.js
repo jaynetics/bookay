@@ -14,6 +14,6 @@ export const Dashboard = (props) => {
     <ForResolution upto={684}>
       <MobileFolderSelect activeId={activeId} />
     </ForResolution>
-    <FolderContent activeId={activeId} />
+    <FolderContent id={activeId} />
   </div>
 }

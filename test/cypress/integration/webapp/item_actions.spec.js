@@ -88,6 +88,7 @@ context('Item actions', () => {
     cy.contains('Cut').click()
     cy.item('Folder 3').rightclick()
     cy.contains('Paste').click()
+    cy.shouldNotHaveItem('Folder 2')
     cy.item('Folder 3').dblclick()
     cy.shouldHaveItem('Folder 2', { within: 'folder' })
       .dblclick()

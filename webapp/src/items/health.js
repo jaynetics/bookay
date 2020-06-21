@@ -1,17 +1,16 @@
 /** @jsx h */
 import { Component, h } from 'preact'
-import { client } from '../shared'
+import { client, useAPI, Loader } from '../shared'
 import { Item } from './item'
-import { useEffect, useState } from 'preact/hooks'
+import { useState } from 'preact/hooks'
 
 export const ItemHealth = ({ path }) => {
-  const [stats, setStats] = useState(null)
+  const { data } = useAPI(client.getStats())
   const [scanBroken, setScanBroken] = useState(false)
-  useEffect(() => { client.getStats().then(setStats) }, [])
-  if (!stats) return null
+  if (!data) return <Loader />
 
-  const { duplicates, emptyFolders, typeCounts } = stats;
-  [...duplicates, ...emptyFolders].forEach(i => i.customMenu = 'discardableMenu')
+  const { duplicates, emptyFolders, typeCounts } = data;
+  [...duplicates, ...emptyFolders].forEach(i => i.customMenu = 'discardMenu')
 
   return <section className='row'>
     <div>
@@ -21,11 +20,13 @@ export const ItemHealth = ({ path }) => {
     </div>
     <div>
       <h3>Duplicates</h3>
-      {duplicates.length ? <Item.List items={duplicates} showMenuButton={true} /> : <None />}
+      {duplicates.length ?
+        <Item.List items={duplicates} showMenuButton={true} /> : <None />}
     </div>
     <div>
       <h3>Empty folders</h3>
-      {emptyFolders.length ? <Item.List items={emptyFolders} showMenuButton={true} /> : <None />}
+      {emptyFolders.length ?
+        <Item.List items={emptyFolders} showMenuButton={true} /> : <None />}
     </div>
     <div className='broken-links'>
       <h3>Broken Links</h3>

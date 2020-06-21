@@ -21,7 +21,7 @@ const getDuplicateBookmarks = async () => {
   })
 
   const items = await Item.findAll({
-    where: { url: duplicateURLs.map(e => e.url) },
+    where: { url: duplicateURLs.map((e) => e.url) },
     include: [{
       model: Item,
       as: 'parent',

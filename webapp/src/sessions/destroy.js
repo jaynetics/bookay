@@ -1,14 +1,9 @@
-import { useEffect } from 'preact/hooks'
-import { flash } from '../lib'
-import { client } from '../shared'
 import { route } from 'preact-router'
+import { flash } from '../lib'
+import { client, useAPI } from '../shared'
 
 export const DestroySession = ({ path }) => {
-  useEffect(() => {
-    client.logout().then(() => {
-      flash('Logged out!')
-      route('/login')
-    })
-  }, [path])
+  const { error, loading } = useAPI(client.logout())
+  if (!error && !loading) flash('Logged out!') && route('/login')
   return null
 }

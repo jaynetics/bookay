@@ -1,9 +1,9 @@
 /** @jsx h */
 import { h } from 'preact'
-import { useEffect, useState } from 'preact/hooks'
 import { Form } from '../lib'
-import { client } from './client'
+import { client, useAPI } from './client'
 import { Item } from '../items'
+import { useMemo } from 'preact/hooks'
 
 export const FolderSelect = ({
   rootLabel = 'none (root)',
@@ -12,12 +12,10 @@ export const FolderSelect = ({
   ...form
 }) => {
   const defaultOption = [rootLabel, '']
-  const [options, setOptions] = useState([])
-
-  useEffect(() => {
-    client.getAll({ filter: { type: 'folder' } })
-      .then((res) => setOptions(Item.sort(res).map(f => [f.name, f.id])))
-  }, [setOptions])
+  const { data } = useAPI(client.getAll({ filter: { type: 'folder' } }))
+  const options = useMemo(
+    () => data && Item.sort(data).map((f) => [f.name, f.id]), [data]
+  ) || []
 
   return <div style={options.length === 0 && { display: 'none' }}>
     <Form.Select

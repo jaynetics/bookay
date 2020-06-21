@@ -25,13 +25,16 @@ export const NewItem = ({ path }) => {
   </Form >
 }
 
-const onSubmit = async ({ type, name, folderId, url }, { fail }) => {
+const onSubmit = ({ type, name, folderId, url }, { fail }) => {
   if (type === 'url' && !url) return fail()
   if (type === 'url' && !name) name = url
   if (type === 'folder') url = undefined
   if (!name) return fail()
 
-  await client.create({ type, name, folderId, url })
-  flash(`New ${Item.typeName(type)} created!`)
-  route(folderId ? `/folders/${folderId}` : '/')
+  client.create({ type, name, folderId, url })
+    .then(() => {
+      flash(`New ${Item.typeName(type)} created!`)
+      route(folderId ? `/folders/${folderId}` : '/')
+    })
+    .catch(flash)
 }

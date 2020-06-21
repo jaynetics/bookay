@@ -12,7 +12,7 @@ export class Configuration {
 
   static load() {
     return new Promise((resolve, _reject) =>
-      this.storage.get(this.fields.map(f => f.id), (result) =>
+      this.storage.get(this.fields.map((f) => f.id), (result) =>
         resolve((result.constructor === Array ? result[0] : result) || {})
       )
     )

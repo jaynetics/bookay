@@ -20,8 +20,5 @@ export const NewUser = ({ path }) => {
 
 const onSubmit = ({ username, password, ownPassword }, { fail }) =>
   client.createUser({ username, password, ownPassword })
-    .then(() => {
-      flash(`User ${username} created!`)
-      route('/')
-    })
+    .then(() => flash(`User ${username} created!`) && route('/'))
     .catch(() => fail())

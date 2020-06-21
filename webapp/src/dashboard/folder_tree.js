@@ -1,26 +1,23 @@
 /** @jsx h */
 import { h } from 'preact'
-import { useState, useEffect } from 'preact/hooks'
 import { route } from 'preact-router'
 import { arrayToTree } from 'performant-array-to-tree'
-import { client } from '../shared'
+import { client, useAPI } from '../shared'
 import { Item } from '../items'
+import { useMemo } from 'preact/hooks'
 
 export const FolderTree = ({ activeId }) => {
-  const [tree, setTree] = useState(null)
-  useEffect(() => {
-    client.getAll({ filter: { type: 'folder' } }).then((result) => {
-      const folders = Item.sort(result)
-      const tree = arrayToTree(folders, { dataField: null, parentId: 'folderId' })
-      setTree(tree)
-    }).catch(console.warn)
-  }, [setTree])
+  const { data } = useAPI(client.getAll({ filter: { type: 'folder' } }))
+  const tree = useMemo(() => data && treeify(data), [data])
 
   return <section className='folder-tree scroll-section'>
     <h2 className='headline' onClick={() => route('/')}>Folders</h2>
     <Content activeId={activeId} tree={tree} />
   </section>
 }
+
+const treeify = (items) =>
+  arrayToTree(Item.sort(items), { dataField: null, parentId: 'folderId' })
 
 const Content = ({ activeId, tree }) => {
   if (!tree) return null

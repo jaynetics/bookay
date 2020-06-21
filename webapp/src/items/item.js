@@ -5,7 +5,7 @@ import { route } from 'preact-router'
 import { ContextMenu, EventTestHelper, classNames } from '../lib'
 import { AppContext } from '../app/index'
 import { ItemContextMenu } from './context_menu'
-import { client } from '../shared'
+import { move, openURL, toggleSelect } from './actions'
 
 export const Item = ({
   activeId = null,
@@ -80,7 +80,7 @@ const Body = ({ app, activeId, children, expandable, item, menuOpen, setMenuCoor
   const openItem = () => {
     if (ContextMenu.closeAll()) return false
     else if (item.type === 'folder') route(`/folders/${item.id}`)
-    else if (item.type === 'url') window.open(item.url)
+    else if (item.type === 'url') openURL(item.url)
   }
 
   return <div
@@ -94,9 +94,7 @@ const Body = ({ app, activeId, children, expandable, item, menuOpen, setMenuCoor
         openItem()
       }
       else { // regular mouse click outside tree => toggle selection state
-        const { selectedIds: ids, setSelectedIds: setIds } = app
-        if (ids.includes(item.id)) setIds(ids.filter(e => e !== item.id))
-        else setIds([...ids, item.id])
+        toggleSelect({ item, ...app })
       }
     }}
     onContextMenu={(event) => {
@@ -204,18 +202,13 @@ const buildDragPreview = ({ text }) => {
   return view
 }
 
-const dropTargetBehavior = ({ item }) => ({
+const dropTargetBehavior = ({ item: { id } }) => ({
   onDragEnter: (e) => e.dataTransfer.dropEffect = 'copy',
   onDragLeave: (e) => e.dataTransfer.dropEffect = 'none',
   onDragOver: (e) => e.preventDefault(), // needed. this WHATWG spec is weird.
-  onDrop: async (e) => {
+  onDrop: (e) => {
     const ids = JSON.parse(e.dataTransfer.getData('application/json'))
-    if (!ids || ids.includes(item.id)) return // cant paste into self
-
-    for (let i = 0; i < ids.length; i++) {
-      await client.update({ id: ids[i], folderId: item.id })
-    }
-    setTimeout(() => window.location.reload(), 50)
+    if (ids && !ids.includes(id)) move({ ids, intoFolderId: id })
   }
 })
 
@@ -224,7 +217,7 @@ const prototypeStyle = (selector, attr) =>
 
 Item.List = ({ items, ...itemProps }) =>
   <div className='item-list'>
-    {items.map(item => <Item item={item} {...itemProps} />)}
+    {items.map((item) => <Item item={item} {...itemProps} />)}
   </div>
 
 Item.sort = (items) =>

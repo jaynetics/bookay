@@ -1,20 +1,15 @@
 /** @jsx h */
 import { h } from 'preact'
-import { useEffect, useState } from 'preact/hooks'
 import { route } from 'preact-router'
 import { Form, flash, useForm } from '../lib'
-import { FolderSelect, client } from '../shared'
+import { FolderSelect, Loader, client, useAPI } from '../shared'
 import { Item } from './item'
 
 export const EditItem = (props) => {
   const { id } = props.matches
-  const [values, setValues] = useState(null)
+  const { data } = useAPI(client.get({ id }), [id])
 
-  useEffect(() => {
-    client.get({ id }).then(setValues).catch(console.warn)
-  }, [id])
-
-  return values && <EditItemForm id={id} {...values} />
+  return data ? <EditItemForm id={id} {...data} /> : <Loader />
 }
 
 const EditItemForm = ({ ...values }) => {
@@ -28,11 +23,11 @@ const EditItemForm = ({ ...values }) => {
   </Form>
 }
 
-const onSubmit = async ({ type, id, name, folderId, url }, { fail }) => {
+const onSubmit = ({ type, id, name, folderId, url }, { fail }) => {
   if (!name) return fail()
   if (type === 'url' && !url) return fail()
 
-  await client.update({ id, name, folderId, url })
-  flash('Changes saved!')
-  route('/')
+  client.update({ id, name, folderId, url })
+    .then(() => flash('Changes saved!') && route('/'))
+    .catch(flash)
 }

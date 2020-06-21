@@ -25,9 +25,6 @@ const onSubmit = ({ folderId }, { fail }, fileInput) => {
   if (!file) return fail()
 
   client.createImport({ file, folderId })
-    .then(({ message }) => {
-      flash(message)
-      route('/')
-    })
+    .then(({ message }) => flash(message) && route('/'))
     .catch(() => fail())
 }

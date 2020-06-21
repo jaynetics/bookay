@@ -15,7 +15,7 @@ html, body, form {
 }
 
 body {
-  background: #f1f1f1;
+  background-color: #f1f1f1;
   padding: 2px 0 6px 0;
 }
 
@@ -86,7 +86,7 @@ form input, form button {
 
 @media (prefers-color-scheme: dark) {
   html, body, form {
-    background: #222;
+    background-color: #222;
   }
 
   .item, form, a, a:focus, a:hover, a:visited {
@@ -97,7 +97,7 @@ form input, form button {
     color: #c9c9c9;
   }
 
-  .action:hover, .action.selected {
+  .action:hover, .action.selected, .loader > div {
     background-color: #c9c9c9;
     color: #222;
   }

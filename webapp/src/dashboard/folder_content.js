@@ -1,45 +1,45 @@
 /** @jsx h */
 import { h } from 'preact'
-import { useEffect, useState, useContext } from 'preact/hooks'
-import { client } from '../shared'
+import { useEffect, useContext, useState } from 'preact/hooks'
+import { Loader, client, useAPI } from '../shared'
 import { Item } from '../items'
 import { AppContext } from '../app/index'
 
-export const FolderContent = ({ activeId }) => {
+export const FolderContent = ({ id }) => {
   const { setSelectedIds } = useContext(AppContext)
-  const [name, setName] = useState(null)
-  const [items, setItems] = useState(null)
 
-  useEffect(() => {
-    // new folder opened, clear previous selections
-    // NOTE: this makes cross-folder selections impossible on mobile
-    setSelectedIds([])
-
-    // fetch folder content
-    client.getAll({ filter: { folderId: activeId } })
-      .then((result) => setItems(Item.sort(result)))
-      .catch(console.warn)
-  }, [activeId, setItems, setSelectedIds])
-
-  useEffect(() => {
-    if (!activeId) {
-      setName('Bookmarks')
-      return
-    }
-    client.get({ id: activeId })
-      .then(({ name }) => setName(name))
-      .catch((e) => /404/.test(e) ? setName('[Deleted]') : console.warn(e))
-  }, [activeId, setName])
-
-  let content
-  if (items === null) content = null // TODO: loader?
-  else if (!activeId && items.length === 0) content = <ImportBookmarksHint />
-  else content = items.map((item) => <Item item={item} showMenuButton={true} />)
+  // new folder opened => clear previous selections
+  // NOTE: this makes cross-folder selections impossible on mobile
+  useEffect(() => { setSelectedIds([]) }, [id, setSelectedIds])
+  const name = useFolderName({ id })
+  const { data, loading } =
+    useAPI(client.getAll({ filter: { folderId: id } }), [id])
 
   return <section className='folder-content scroll-section'>
     <h2 className='headline'>{name}</h2>
-    {content}
+    <Content atRoot={!id} items={data} loading={loading} />
   </section>
+}
+
+const useFolderName = ({ id }) => {
+  const [name, setName] = useState('Loading…')
+
+  useEffect(() => {
+    if (!id) setName('Bookmarks')
+    else {
+      client.get({ id })
+        .then(({ name }) => setName(name))
+        .catch(() => setName('[Deleted]'))
+    }
+  }, [id])
+
+  return name
+}
+
+const Content = ({ atRoot, items, loading }) => {
+  if (!items) return <Loader /> // no loader on query change to reduce flicker
+  else if (atRoot && !loading && !items.length) return <ImportBookmarksHint />
+  else return <Item.List items={Item.sort(items)} showMenuButton={true} />
 }
 
 const ImportBookmarksHint = () =>

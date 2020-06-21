@@ -23,5 +23,7 @@ const ID = `FlashMessage-${Math.random()}`
 const ORIGIN = window.location.origin
 const SOURCE = window
 
-export const flash = (content) =>
+export const flash = (content) => {
   window.postMessage({ id: ID, content }, ORIGIN)
+  return true
+}
