@@ -16,7 +16,7 @@ However, if you use multiple browsers, or switch your browser from time to time,
 - support for nested folders
 - data import and export
 - scan for dupes and broken links
-- multiple users per instance
+- support for multiple users per instance
 - responsiveness and dark mode
 
 ## How to use
