@@ -15,16 +15,50 @@ context('Tree navigation', () => {
     cy.shouldNotHaveItem('Bar', { within: 'tree' })
     cy.shouldNotHaveItem('Baz', { within: 'tree' })
     cy.item('Foo', { within: 'tree' })
-      .get('.item-toggle').filter(':visible').click()
+      .get('.item-expansion-toggle').filter(':visible').click()
     cy.shouldHaveItem('Bar', { within: 'tree' })
     cy.shouldNotHaveItem('Baz')
 
     // deepest folder should not have toggle, but contents can be shown
     cy.item('Bar', { within: 'tree' })
-      .get('.item-toggle')
+      .get('.item-expansion-toggle')
       .should('be.empty')
-      .should('have.attr', 'aria-disabled')
     cy.item('Bar', { within: 'tree' }).click()
     cy.shouldHaveItem('Baz')
+  })
+
+  it('can be used to select folders across nesting levels', () => {
+    cy.createItem({
+      name: 'Foo', type: 'folder', children: [
+        {
+          name: 'Bar', type: 'folder', children: [
+            { name: 'Baz', type: 'folder' }
+          ]
+        }
+      ]
+    })
+    cy.visit('/')
+
+    cy.item('Foo', { within: 'tree' })
+      .get('.item-expansion-toggle').click()
+    cy.item('Bar', { within: 'tree' })
+      .get('.item-expansion-toggle').last().click()
+
+    cy.item('Bar', { within: 'tree' }).rightclick('top')
+    cy.contains('Select').click()
+    cy.item('Baz', { within: 'tree' }).rightclick()
+    cy.contains('Select').click()
+
+    cy.item('Foo', { within: 'tree' }).should('not.have.class', 'selected')
+    cy.item('Bar', { within: 'tree' }).should('have.class', 'selected')
+    cy.item('Baz', { within: 'tree' }).should('have.class', 'selected')
+
+    // should be able to de-select by clicking checkmark
+    cy.item('Baz', { within: 'tree' })
+      .get('.item-accessory').last().click()
+
+    cy.item('Foo', { within: 'tree' }).should('not.have.class', 'selected')
+    cy.item('Bar', { within: 'tree' }).should('have.class', 'selected')
+    cy.item('Baz', { within: 'tree' }).should('not.have.class', 'selected')
   })
 })

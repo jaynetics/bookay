@@ -231,7 +231,7 @@ section h2, h3 {
   white-space: nowrap;
 }
 
-.item-toggle {
+.item-accessory {
   display: inline-block;
   text-align: center;
   width: 26px;
@@ -452,7 +452,7 @@ section h2, h3 {
   }
 
   .dashboard .headline,
-  .item-toggle {
+  .item-expansion-toggle {
     display: none;
   }
 

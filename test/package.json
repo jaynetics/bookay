@@ -4,12 +4,12 @@
   "description": "tests",
   "main": "index.js",
   "scripts": {
-    "cy:open": "cypress open",
-    "cy:run": "cypress run",
-    "start": "start-server-and-test start_server http://localhost:3033 cy:open",
+    "pretest": "npm --prefix ../webapp run build",
+    "start": "start-server-and-test start_server http://localhost:3033 test:open",
     "start_server": "npm --prefix ../server run start:integration",
-    "sync_webapp": "npm --prefix ../webapp run build",
-    "test": "start-server-and-test start_server http://localhost:3033 cy:run"
+    "test": "start-server-and-test start_server http://localhost:3033 test:run",
+    "test:open": "npm run pretest && cypress open",
+    "test:run": "cypress run"
   },
   "repository": "https://github.com/jaynetics/bookay",
   "author": "Janosch Müller",

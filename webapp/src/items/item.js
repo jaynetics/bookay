@@ -13,7 +13,7 @@ export const Item = ({
   item,
   showMenuButton = false,
 }) => {
-  const [open, setOpen] = useState(false)
+  const [expanded, setExpanded] = useState(false)
   const [menuCoords, setMenuCoords] = useState(null)
 
   const app = useContext(AppContext)
@@ -31,10 +31,11 @@ export const Item = ({
       setMenuCoords={setMenuCoords}
     >
       <Icon
+        app={app}
         expandable={expandable}
         item={item}
-        open={open}
-        setOpen={setOpen}
+        expanded={expanded}
+        setExpanded={setExpanded}
       />
 
       <Name item={item} />
@@ -47,7 +48,7 @@ export const Item = ({
       />}
     </Body>
 
-    {open && <Item.List
+    {expanded && <Item.List
       activeId={activeId}
       expandable={expandable}
       items={item.children}
@@ -109,15 +110,33 @@ const Body = ({ app, activeId, children, expandable, item, menuOpen, setMenuCoor
   </div>
 }
 
-const Icon = ({ expandable, item, open, setOpen, }) =>
-  <div onClick={() => expandable && setOpen(!open)}>
-    <span className='item-toggle' aria-disabled={!expandable}>
-      {expandable && item.children.length ? (open ? '▼' : '▶') : null}
+const Icon = ({ app, expandable, expanded, item, setExpanded, }) => {
+  const selected = app.selectedIds.includes(item.id)
+
+  let accessory = null
+  if (selected) accessory = '✓'
+  else if (expandable && item.children.length) accessory = expanded ? '▼' : '▶'
+
+  return <div onClick={(event) => {
+    if (selected) {
+      event.stopPropagation()
+      toggleSelect({ item, ...app })
+    }
+    else {
+      setExpanded(!expanded)
+    }
+  }}>
+    <span className={classNames({
+      'item-accessory': true,
+      'item-expansion-toggle': expandable,
+    })}>
+      {accessory}
     </span>
     <span className='item-icon' role='img' aria-label='Icon'>
       {item.type === 'folder' ? <FolderIcon /> : '★'}
     </span>
   </div>
+}
 
 // replacement for U+1F5BF BLACK FOLDER, which is not available everywhere yet
 const FolderIcon = () =>

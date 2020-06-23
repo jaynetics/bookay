@@ -5,8 +5,9 @@
     "node": "^14.1"
   },
   "scripts": {
-    "build": "npm --prefix server install && npm --prefix webapp install && npm --prefix webapp run build",
-    "pretest": "npm run build && npm --prefix test install",
+    "build": "npm --prefix webapp run build",
+    "postinstall": "npm --prefix server install && npm --prefix webapp install",
+    "pretest": "npm --prefix test install",
     "start": "node server/server.js",
     "test": "npm --prefix webapp test && npm --prefix server test && npm --prefix test test"
   },
