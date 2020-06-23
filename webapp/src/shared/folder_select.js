@@ -17,7 +17,7 @@ export const FolderSelect = ({
     () => data && Item.sort(data).map((f) => [f.name, f.id]), [data]
   ) || []
 
-  return <div style={options.length === 0 && { display: 'none' }}>
+  return <div style={options.length === 0 && { visibility: 'hidden' }}>
     <Form.Select
       options={[defaultOption, ...options]}
       name={name}
