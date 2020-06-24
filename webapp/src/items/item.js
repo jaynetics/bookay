@@ -76,7 +76,9 @@ const Wrapper = ({ app, children, item }) =>
 
 const Body = ({ app, activeId, children, expandable, item, menuOpen, setMenuCoords }) => {
   const [touchEvent, setTouchEvent] = useState(false)
-  const onTouchStart = () => setTouchEvent(true)
+  const markEventAsTouchEvent = () => setTouchEvent(true)
+
+  const active = item.id === activeId || menuOpen
 
   const openItem = () => {
     if (ContextMenu.closeAll()) return false
@@ -84,17 +86,23 @@ const Body = ({ app, activeId, children, expandable, item, menuOpen, setMenuCoor
     else if (item.type === 'url') openURL(item.url)
   }
 
-  return <div
-    className={classNames({
-      'item-body': true,
-      active: item.id === activeId || menuOpen,
-    })}
-    onClick={() => {
+  return <a
+    className={classNames({ 'item-body': true, active })}
+    href={item.url || `/#/folders/${item.id}`}
+    native // disables automatic preact-router routing for this tag
+    onClick={(event) => {
+      // use href attribute if any new tab / window modifier is pressed
+      if (event.metaKey || event.ctrlKey || event.shiftKey) return
+
+      event.preventDefault()
+
+      // open item directly on touch or if it is expandable
       if (expandable || touchEvent) {
         if (touchEvent) setTouchEvent(false)
         openItem()
       }
-      else { // regular mouse click outside tree => toggle selection state
+      // regular mouse click outside tree => toggle selection state
+      else {
         toggleSelect({ item, ...app })
       }
     }}
@@ -103,11 +111,11 @@ const Body = ({ app, activeId, children, expandable, item, menuOpen, setMenuCoor
       setMenuCoords([event.x, event.y])
     }}
     onDblClick={openItem}
-    onTouchStart={onTouchStart}
+    onTouchStart={markEventAsTouchEvent}
   >
     {children}
-    <EventTestHelper target={item.name} touchstart={onTouchStart} />
-  </div>
+    <EventTestHelper target={item.name} touchstart={markEventAsTouchEvent} />
+  </a>
 }
 
 const Icon = ({ app, expandable, expanded, item, setExpanded, }) => {
@@ -119,6 +127,7 @@ const Icon = ({ app, expandable, expanded, item, setExpanded, }) => {
 
   return <div onClick={(event) => {
     if (selected) {
+      event.preventDefault()
       event.stopPropagation()
       toggleSelect({ item, ...app })
     }
@@ -162,7 +171,9 @@ const ItemMenuButton = ({ active, setMenuCoords }) => {
       ContextMenu.closeAll()
       setMenuCoords([event.x, event.y])
       setHover(false)
-      event.stopPropagation() // do not select the item
+      // do not select or open the item
+      event.preventDefault()
+      event.stopPropagation()
     }}
     onMouseEnter={() => hover === null || setHover(true)}
     onMouseLeave={() => hover === null || setHover(false)}

@@ -251,6 +251,15 @@ section h2, h3 {
   white-space: nowrap;
 }
 
+/* disable sakura a styles */
+.item-body {
+  color: inherit;
+}
+.item-body:hover {
+  border-bottom: unset;
+  color: inherit;
+}
+
 .item-body:hover > .item-name,
 .item-body.active > .item-name {
   color: #982c61;

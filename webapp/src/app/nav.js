@@ -2,7 +2,7 @@
 import { Fragment, createRef, h } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import { route } from 'preact-router'
-import { classNames, useDebouncedCallback } from '../lib'
+import { classNames, flash, useDebouncedCallback } from '../lib'
 
 export const Nav = () => {
   const [open, setOpen] = useState(false)
@@ -39,6 +39,7 @@ export const Nav = () => {
 
 const Search = () => {
   const inputRef = createRef()
+
   const [updateSearch] = useDebouncedCallback((value) => {
     const showingSearch = /\/search\//.test(window.location.href)
     if (value) {
@@ -49,6 +50,30 @@ const Search = () => {
       window.history.back()
     }
   }, 200)
+
+  useEffect(() => {
+    const hotkeyListener = (event) => {
+      const focused = inputRef.current === document.activeElement
+
+      // focus on CMD/CTRL+f
+      if ((event.metaKey || event.ctrlKey) && event.key === 'f' && !focused) {
+        inputRef.current.focus()
+        event.preventDefault()
+        const modKey = /Mac/i.test(navigator.platform) ? 'CMD' : 'CTRL'
+        flash(`Hit ${modKey}+f again to search the page`)
+      }
+
+      // close on ESC
+      else if (event.keyCode === 27 && focused) {
+        inputRef.current.blur()
+        updateSearch('') // does not clear input. should it?
+      }
+    }
+
+    window.addEventListener('keydown', hotkeyListener)
+
+    return () => window.removeEventListener('keydown', hotkeyListener)
+  }, [inputRef, updateSearch])
 
   return <Fragment>
     <span className='search-icon' onClick={() => inputRef.current.focus()}>
