@@ -1,4 +1,5 @@
-import { browser, getCurrentTab, ApiClient, Badge, Configuration } from '../shared/index.js'
+import { ApiClient } from '../node_modules/@bookay/client/index.js'
+import { browser, getCurrentTab, Badge, Configuration } from '../shared/index.js'
 
 let badgeStateIdByURL = {}
 

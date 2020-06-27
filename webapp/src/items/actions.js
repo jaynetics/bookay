@@ -75,7 +75,7 @@ export const DeleteSelected = ({ app: { broadcastChange, selectedIds } }) => {
 }
 
 export const OpenURL = ({ app, item }) =>
-  <Button icon='↗️' text='Open URL' func={() => openURL(item.url)} />
+  <Button icon='→' text='Open URL' func={() => openURL(item.url)} />
 
 export const CopyURL = ({ app, item }) =>
   <Button icon='⧉' text='Copy URL' func={() => copyURL(item.url)} />
@@ -84,7 +84,7 @@ export const SeeArchiveOrg = ({ app, item }) => {
   const url = archivedURL({ item })
 
   return <Button
-    icon='↗️'
+    icon='→'
     text='See on archive.org'
     func={() => openURL(url)}
   />

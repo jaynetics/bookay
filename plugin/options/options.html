@@ -4,6 +4,7 @@
 
 <head>
   <meta charset='utf-8'>
+  <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no' />
   <script type='module' src='options.js'></script>
   <link rel='stylesheet' href='options.css' />
 </head>
@@ -11,17 +12,25 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
-  <p>
-    Please read <a href="https://github.com/jaynetics/bookay#bookay">this</a>
-    if you do not know what to enter here.
-  </p>
+  <div class='container'>
+    <div class='header'>
+      <img src='../assets/icon-48.png' width=24 height=24 alt='logo' />
+      <h1>bookay settings</h1>
+    </div>
 
-  <form>
-    <button type='submit'>Save</button>
-  </form>
+    <p>
+      Please read <a href='https://github.com/jaynetics/bookay#bookay'>this</a>
+      if you do not know what to enter here.
+    </p>
 
-  <button id='logoutButton'>Log out</button>
-  <div id='logoutMessage'></div>
+    <form>
+      <button type='submit'>Save</button>
+    </form>
+
+    <div id='message'></div>
+
+    <button id='logoutButton'>Log out</button>
+  </div>
 </body>
 
 </html>

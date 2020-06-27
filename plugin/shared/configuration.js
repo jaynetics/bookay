@@ -2,11 +2,11 @@ import { browser } from './browser.js'
 
 export class Configuration {
   static fields = [
-    { id: 'serviceURL', type: 'text', title: 'Service URL', required: true, defaultValue: 'https://', pattern: '^https?://.+$' },
-    { id: 'timeoutSeconds', type: 'number', title: 'Timeout in Seconds', required: true, defaultValue: 20 },
+    { id: 'serviceURL', type: 'text', title: 'Service URL (required)', required: true, defaultValue: 'https://', pattern: '^https?://.+$' },
     { id: 'suggestSize', type: 'number', title: 'How many recent folders to show', required: true, defaultValue: 3, min: 0, max: 20 },
     { id: 'suggestRoot', type: 'checkbox', title: 'Show "Add to root" suggestion', defaultValue: true },
     { id: 'historySize', type: 'number', title: 'How many recent bookmarks to show', required: true, defaultValue: 3, min: 0, max: 20 },
+    { id: 'timeoutSeconds', type: 'number', title: 'Timeout in seconds', required: true, defaultValue: 20 },
     { id: 'keepAliveMinutes', type: 'number', title: 'Keep service alive by pinging every N minutes (0 to disable)', required: true, defaultValue: 0, min: 0 },
   ]
 

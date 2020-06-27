@@ -1,10 +1,10 @@
 {
-  "name": "bookay-tests",
+  "name": "@bookay/tests",
   "version": "1.0.0",
-  "description": "tests",
+  "description": "integration tests for bookay components",
   "main": "index.js",
   "scripts": {
-    "pretest": "npm --prefix ../webapp run build",
+    "pretest": "npm --prefix ../webapp run build && npm --prefix ../plugin run build",
     "start": "start-server-and-test start_server http://localhost:3033 test:open",
     "start_server": "npm --prefix ../server run start:integration",
     "test": "start-server-and-test start_server http://localhost:3033 test:run",

@@ -7,7 +7,7 @@ context('Import', () => {
     cy.contains('Import').click()
     cy.url().should('contain', '/import')
 
-    cy.get('[type=file]').attachFile('../../../shared/fixtures/bookmarks.html')
+    cy.get('[type=file]').attachFile('../../../assets/fixtures/bookmarks.html')
     cy.get('form').submit()
     cy.shouldFlash('Added 4 items')
     cy.shouldHaveItem('Good reads')

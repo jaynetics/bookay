@@ -1,4 +1,5 @@
-import { ApiClient, Configuration } from '../shared/index.js'
+import { ApiClient } from '../node_modules/@bookay/client/index.js'
+import { Configuration } from '../shared/index.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
   const form = document.querySelector('form')
@@ -19,9 +20,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       { ...a, [e.id]: e.type === 'checkbox' ? e.checked : e.value }
     ), {})
 
+  const showMessage = (string) =>
+    document.getElementById('message').innerHTML = string
+
   const saveValues = (event) => {
     event.preventDefault()
     Configuration.save(getEnteredValues())
+    showMessage('😊 Saved!')
   }
 
   const restoreValues = async () => {
@@ -43,10 +48,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.getElementById('logoutButton').addEventListener('click', (event) => {
     event.preventDefault()
-    const msg = document.getElementById('logoutMessage')
     const client = new ApiClient(getEnteredValues())
     client.logout()
-      .then((_res) => msg.innerHTML = '😊 Logged out!')
-      .catch((err) => msg.innerHTML = `😕 Error logging out. ${err.message}`)
+      .then((_res) => showMessage('😊 Logged out!'))
+      .catch((err) => showMessage(`😕 Error logging out. ${err.message}`))
   })
 })

@@ -1,11 +1,6 @@
+import { ApiClient } from '../node_modules/@bookay/client/index.js'
 import Menu from './menu.js'
-import {
-  ApiClient,
-  Badge,
-  Configuration,
-  browser,
-  getCurrentTab,
-} from '../shared/index.js'
+import { Badge, Configuration, browser, getCurrentTab } from '../shared/index.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
   const popup = new Popup()
@@ -66,7 +61,7 @@ class Popup {
     this.showRecentBookmarks({ recentBookmarks })
 
     Menu.addItem({
-      icon: '↗️',
+      icon: '→',
       text: 'Manage bookmarks…',
       func: () => browser.tabs.create({ url: this.client.dashboardURL() }),
     })
@@ -108,7 +103,7 @@ class Popup {
     )
 
     Menu.addItem({
-      icon: '↗️',
+      icon: '→',
       text: suggestedFolders.length ? 'Another folder…' : 'Bookmarks…',
       func: () => browser.tabs.create({
         url: this.client.newItemURL({ url: this.siteURL, name: this.siteName })

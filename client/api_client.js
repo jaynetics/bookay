@@ -1,7 +1,3 @@
-// *******************************************************************
-// EDIT THIS ONLY IN <repo-root>/shared, then use sync-code.sh to sync
-// *******************************************************************
-
 export class ApiClient {
   constructor({
     historySize = 0,

@@ -1,0 +1,21 @@
+{
+  "name": "@bookay/plugin",
+  "description": "browser extension to bookmark pages in bookay",
+  "scripts": {
+    "build": "./scripts/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "@bookay/client": "../client",
+    "babel-loader": "^8.1.0",
+    "fs-extra": "^9.0.1",
+    "glob": "^7.1.6",
+    "webpack": "4.42.0"
+  },
+  "version": "1.0.0",
+  "repository": "https://github.com/jaynetics/bookay",
+  "author": "Janosch Müller",
+  "license": "MIT"
+}

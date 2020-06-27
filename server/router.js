@@ -19,7 +19,7 @@ router.post('/api/users', ctrl.UsersController.create) // unprotected for first 
 
 if (process.env.NODE_ENV === 'test') {
   router.post('/api/integration_test', ctrl.IntegrationTestsController.create)
-  router.use('/plugin', express.static('../plugin'))
+  router.use('/plugin', express.static('../plugin/build/default'))
 }
 
 // protected routes

@@ -1,4 +1,4 @@
-# bookay-server
+# @bookay/server
 
 This is a backend that stores your bookmarks in a database of your choice.
 

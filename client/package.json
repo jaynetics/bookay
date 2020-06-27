@@ -1,0 +1,12 @@
+{
+  "name": "@bookay/client",
+  "description": "API client for the endpoints provided by @bookay/server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0",
+  "repository": "https://github.com/jaynetics/bookay",
+  "author": "Janosch Müller",
+  "license": "MIT"
+}

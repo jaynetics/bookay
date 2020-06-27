@@ -1,7 +1,7 @@
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-preact-pure'
 import fetchMock from 'fetch-mock-jest'
-import initFetchMocks from './shared/init_fetch_mocks'
+import { initFetchMocks } from '@bookay/client'
 import { client } from './shared'
 
 configure({ adapter: new Adapter() })

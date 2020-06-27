@@ -1,7 +1,7 @@
 {
-  "name": "bookay-server",
+  "name": "@bookay/server",
   "version": "1.0.0",
-  "description": "bookay-server",
+  "description": "backend and API for bookay bookmarks",
   "main": "server.js",
   "scripts": {
     "postinstall": "sequelize-cli db:migrate",

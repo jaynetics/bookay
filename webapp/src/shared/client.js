@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'preact/hooks'
 import { route } from 'preact-router'
-import { ApiClient } from './api_client'
+import { ApiClient } from '@bookay/client'
 import { getHashParam } from '../lib'
 
 export const client = new ApiClient({

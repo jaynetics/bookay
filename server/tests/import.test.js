@@ -6,7 +6,7 @@ const { Item } = require('../models')
 
 describe('POST /api/imports', () => {
   it('allows uploading a Netscape bookmarks HTML', async () => {
-    const file = path.resolve(__dirname, '../../shared/fixtures/bookmarks.html')
+    const file = path.resolve(__dirname, '../../assets/fixtures/bookmarks.html')
     const data = await fs.readFile(file, 'binary')
     const base64 = Buffer.from(data).toString('base64')
 
@@ -29,7 +29,7 @@ describe('POST /api/imports', () => {
   })
 
   it('allows importing into an existing folder', async () => {
-    const file = path.resolve(__dirname, '../../shared/fixtures/bookmarks.html')
+    const file = path.resolve(__dirname, '../../assets/fixtures/bookmarks.html')
     const data = await fs.readFile(file, 'binary')
     const base64 = Buffer.from(data).toString('base64')
 

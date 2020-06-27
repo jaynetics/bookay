@@ -33,6 +33,7 @@
     }
   },
   "options_ui": {
+    "open_in_tab": true,
     "page": "options/options.html"
   },
   "content_security_policy": "script-src 'self'; object-src 'self'",
@@ -40,11 +41,6 @@
     "storage",
     "tabs"
   ],
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "janosch84@gmail.com"
-    }
-  },
   "icons": {
     "128": "assets/icon-128.png",
     "16": "assets/icon-16.png",

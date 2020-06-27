@@ -1,18 +1,4 @@
-// *******************************************************************
-// EDIT THIS ONLY IN <repo-root>/shared, then use sync-code.sh to sync
-// *******************************************************************
-
-const fixtures = [
-  { id: 11, name: 'Foo', type: 'folder' },
-  { id: 22, name: 'Bar', type: 'folder', folderId: 11 },
-  { id: 33, name: 'Baz', type: 'url', url: 'http://baz.baz' },
-  { id: 44, name: 'Qux', type: 'url', url: 'http://qux.qux', folderId: 11 },
-  { id: 55, name: 'This one has a really long name', type: 'folder' },
-]
-
-const folders = fixtures.filter(f => f.type === 'folder')
-
-export default (fm, client) => {
+export const initFetchMocks = (fm, client) => {
   fixtures.forEach(item => {
     fm.get(
       client.itemURL({ id: item.id }),
@@ -76,3 +62,13 @@ export default (fm, client) => {
     { status: 200, body: {} }
   )
 }
+
+const fixtures = [
+  { id: 11, name: 'Foo', type: 'folder' },
+  { id: 22, name: 'Bar', type: 'folder', folderId: 11 },
+  { id: 33, name: 'Baz', type: 'url', url: 'http://baz.baz' },
+  { id: 44, name: 'Qux', type: 'url', url: 'http://qux.qux', folderId: 11 },
+  { id: 55, name: 'This one has a really long name', type: 'folder' },
+]
+
+const folders = fixtures.filter(f => f.type === 'folder')
