@@ -7,7 +7,7 @@ import { Item } from '../items'
 import { useMemo } from 'preact/hooks'
 
 export const FolderTree = ({ activeId }) => {
-  const { data } = useAPI(client.getAll({ filter: { type: 'folder' } }))
+  const { data } = useAPI(client.getAllFolders())
   const tree = useMemo(() => data && treeify(data), [data])
 
   return <section className='folder-tree scroll-section'>

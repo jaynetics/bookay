@@ -34,7 +34,7 @@ export const initFetchMocks = (fm, client) => {
     { status: 200, body: fixtures.filter(f => !f.folderId) }
   )
   fm.get(
-    client.itemsURL({ filter: { type: 'folder' } }),
+    client.itemsURL({ filter: { type: 'folder' }, range: [0, 1000] }),
     { status: 200, body: fixtures.filter(f => f.type === 'folder') }
   )
   fm.get(

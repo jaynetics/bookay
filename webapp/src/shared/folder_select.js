@@ -12,7 +12,7 @@ export const FolderSelect = ({
   ...form
 }) => {
   const defaultOption = [rootLabel, '']
-  const { data } = useAPI(client.getAll({ filter: { type: 'folder' } }))
+  const { data } = useAPI(client.getAllFolders())
   const options = useMemo(
     () => data && Item.sort(data).map((f) => [f.name, f.id]), [data]
   ) || []

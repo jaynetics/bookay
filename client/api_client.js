@@ -64,8 +64,12 @@ export class ApiClient {
     return this.fetch(this.itemURL({ id }))
   }
 
-  getAll({ filter = null, sort = null }) {
-    return this.fetch(this.itemsURL({ filter, sort }))
+  getAllFolders() {
+    return this.getAll({ filter: { type: 'folder' }, range: [0, 1000] })
+  }
+
+  getAll({ filter = null, range = null, sort = null }) {
+    return this.fetch(this.itemsURL({ filter, range, sort }))
   }
 
   createImport({ file, folderId }) {
@@ -135,6 +139,24 @@ export class ApiClient {
       })
   }
 
+  prepareExport({ folderId }) {
+    return this.prepareDownload({ url: this.exportURL({ folderId }) })
+  }
+
+  prepareDownload({ url }) {
+    return new Promise((resolve, reject) => {
+      fetch(url, { headers: this.headers })
+        .then((res) => {
+          const disposition = res.headers.get('content-disposition')
+          const filename = disposition && disposition.split('filename=')[1]
+          res.blob()
+            .then((blob) => resolve({ blob, filename }))
+            .catch(reject)
+        })
+        .catch(reject)
+    })
+  }
+
   // API URLs
 
   loginURL() {
@@ -158,8 +180,8 @@ export class ApiClient {
     return `${this.serviceURL}/api/items`
   }
 
-  itemsURL({ filter = null, sort = null }) {
-    return `${this.serviceURL}/api/items${this.toQuery({ filter, sort })}`
+  itemsURL({ filter = null, range = null, sort = null }) {
+    return `${this.serviceURL}/api/items${this.toQuery({ filter, range, sort })}`
   }
 
   dissolveURL({ id }) {

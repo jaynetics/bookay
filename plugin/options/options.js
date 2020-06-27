@@ -34,11 +34,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     Configuration.fields.forEach(({ defaultValue, id, type }) => {
       const element = document.getElementById(id)
       const value = config[id]
-      if (type === 'checkbox') {
-        element.checked = value === undefined ? defaultValue : value
-      } else {
-        element.value = value || defaultValue
-      }
+      const attr = type === 'checkbox' ? 'checked' : 'value'
+      element[attr] = value === undefined ? defaultValue : value
     })
   }
 

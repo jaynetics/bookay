@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
-import { Form, useForm } from '../lib'
+import { Form, useForm, flash } from '../lib'
 import { FolderSelect, client } from '../shared'
 
 export const NewExport = ({ path }) => {
@@ -17,5 +17,13 @@ export const NewExport = ({ path }) => {
   </Form>
 }
 
-const onSubmit = ({ folderId }) =>
-  window.location.href = client.exportURL({ folderId })
+const onSubmit = ({ folderId }) => {
+  client.prepareExport({ folderId })
+    .then(({ blob, filename }) => {
+      const dummy = document.createElement('a')
+      dummy.href = window.URL.createObjectURL(blob)
+      dummy.setAttribute('download', filename)
+      dummy.click()
+    })
+    .catch(flash)
+}
