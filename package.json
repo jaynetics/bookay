@@ -5,14 +5,25 @@
     "node": "^14.1"
   },
   "scripts": {
-    "build": "npm --prefix webapp run build",
-    "postinstall": "npm --prefix server install && npm --prefix webapp install",
+    "build": "npm-run-all build:*",
+    "build:webapp": "npm --prefix webapp run build",
+    "build:plugin": "npm --prefix plugin run build",
+    "install:server": "npm --prefix server install",
+    "install:webapp": "npm --prefix webapp install",
+    "install:plugin": "npm --prefix plugin install",
+    "postinstall": "npm-run-all install:*",
     "pretest": "npm --prefix test install",
     "start": "node server/server.js",
-    "test": "npm --prefix webapp test && npm --prefix server test && npm --prefix test test"
+    "test": "npm-run-all test:*",
+    "test:webapp": "npm --prefix webapp test",
+    "test:server": "npm --prefix server test",
+    "test:test": "npm --prefix test test"
   },
   "version": "1.0.0",
   "repository": "https://github.com/jaynetics/bookay",
   "author": "Janosch Müller",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
 }

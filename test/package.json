@@ -4,7 +4,7 @@
   "description": "integration tests for bookay components",
   "main": "index.js",
   "scripts": {
-    "pretest": "npm --prefix ../webapp run build && npm --prefix ../plugin run build",
+    "pretest": "npm --prefix .. run build",
     "start": "start-server-and-test start_server http://localhost:3033 test:open",
     "start_server": "npm --prefix ../server run start:integration",
     "test": "start-server-and-test start_server http://localhost:3033 test:run",
