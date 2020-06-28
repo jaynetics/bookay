@@ -2,10 +2,10 @@
 
 process.on('unhandledRejection', err => { throw err })
 
-const fs = require('fs-extra')
 const path = require('path')
-const glob = require('glob')
-const webpack = require('webpack')
+const fs = require('../node_modules/fs-extra')
+const glob = require('../node_modules/glob')
+const webpack = require('../node_modules/webpack')
 
 const root = path.resolve(__dirname, '..')
 const buildDir = path.resolve(root, 'build')
