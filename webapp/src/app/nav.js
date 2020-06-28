@@ -31,6 +31,7 @@ export const Nav = () => {
       <a className='button' href='/exports/create'>Export</a>
       <a className='button' href='/health'>Stats &amp; health</a>
       <a className='button' href='/users/create'>Add user</a>
+      <a className='button' href='/users/show'>My account</a>
       <a className='button' href='/logout'>Logout</a>
       <a className='button' href='https://github.com/jaynetics/bookay'>About</a>
     </div>

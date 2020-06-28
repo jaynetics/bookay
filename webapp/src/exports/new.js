@@ -1,13 +1,12 @@
 /** @jsx h */
 import { h } from 'preact'
-import { Form, useForm, flash } from '../lib'
+import { Form, useForm } from '../lib'
 import { FolderSelect, client } from '../shared'
 
 export const NewExport = ({ path }) => {
   const form = useForm({})
 
   return <Form
-    disableOnSubmit={false}
     headline='Export bookmarks'
     onSubmit={onSubmit}
     submitText='Download'
@@ -17,13 +16,14 @@ export const NewExport = ({ path }) => {
   </Form>
 }
 
-const onSubmit = ({ folderId }) => {
+const onSubmit = ({ folderId }, { fail, setSubmitting }) => {
   client.prepareExport({ folderId })
     .then(({ blob, filename }) => {
       const dummy = document.createElement('a')
       dummy.href = window.URL.createObjectURL(blob)
       dummy.setAttribute('download', filename)
       dummy.click()
+      setSubmitting(false)
     })
-    .catch(flash)
+    .catch(fail)
 }

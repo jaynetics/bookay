@@ -86,7 +86,16 @@ export class ApiClient {
 
   createUser({ username, password, ownPassword }) {
     const body = JSON.stringify({ username, password, ownPassword })
-    return this.fetch(this.createUserURL(), { method: 'POST', body })
+    return this.fetch(this.usersURL(), { method: 'POST', body })
+  }
+
+  changePassword({ newPassword, oldPassword }) {
+    const body = JSON.stringify({ newPassword, oldPassword })
+    return this.fetch(this.usersURL(), { method: 'PUT', body })
+  }
+
+  deleteAccount() {
+    return this.fetch(this.usersURL(), { method: 'DELETE' })
   }
 
   getStats() {
@@ -147,8 +156,8 @@ export class ApiClient {
     return new Promise((resolve, reject) => {
       fetch(url, { headers: this.headers })
         .then((res) => {
-          const disposition = res.headers.get('content-disposition')
-          const filename = disposition && disposition.split('filename=')[1]
+          const disp = res.headers.get('content-disposition')
+          const filename = disp && disp.split('filename=')[1]
           res.blob()
             .then((blob) => resolve({ blob, filename }))
             .catch(reject)
@@ -196,7 +205,7 @@ export class ApiClient {
     return `${this.serviceURL}/api/export${this.toQuery({ folderId })}`
   }
 
-  createUserURL() {
+  usersURL() {
     return `${this.serviceURL}/api/users`
   }
 

@@ -21,4 +21,7 @@ export const NewUser = ({ path }) => {
 const onSubmit = ({ username, password, ownPassword }, { fail }) =>
   client.createUser({ username, password, ownPassword })
     .then(() => flash(`User ${username} created!`) && route('/'))
-    .catch(() => fail())
+    .catch((e) => {
+      if (/401/.test(e)) flash('You must be logged in to do this.')
+      fail()
+    })

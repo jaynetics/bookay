@@ -18,7 +18,7 @@ context('Authorization', () => {
     cy.get('[name=password]').type('wrong pw')
     cy.get('form').submit()
     cy.url().should('contain', '/#/login')
-    cy.shouldFlash('Wrong')
+    cy.contains('Wrong').should('exist')
 
     // test redirect after successful login
     cy.get('[type=password]').clear().type('pw')

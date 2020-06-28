@@ -3,6 +3,7 @@ const { currentUser } = require('../middlewares/guard')
 
 const create = async (req, res) => {
   const { username, password, ownPassword } = req.body
+
   // verify password of adding user, except for initial user
   if ((await User.count()) > 0) {
     const user = await currentUser(req)
@@ -15,4 +16,20 @@ const create = async (req, res) => {
     .catch((e) => res.status(400).send({}))
 }
 
-module.exports = { create }
+const update = async (req, res) => {
+  const { body: { newPassword, oldPassword }, user } = req
+
+  if (!user.validPassword(oldPassword)) {
+    return res.status(403).send({})
+  }
+
+  await user.update({ password: newPassword })
+  res.status(200).send({})
+}
+
+const destroy = async (req, res) => {
+  await req.user.destroy()
+  res.status(200).send({})
+}
+
+module.exports = { create, destroy, update }

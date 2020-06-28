@@ -6,7 +6,7 @@ import { Dashboard } from '../dashboard'
 import { EditItem, ItemHealth, NewItem, RecentItems, SearchResult } from '../items'
 import { NewImport } from '../imports/new'
 import { NewExport } from '../exports/new'
-import { NewUser } from '../users/new'
+import { NewUser, ShowUser } from '../users'
 import { NewSession, DestroySession } from '../sessions'
 
 export const Router = () =>
@@ -24,6 +24,7 @@ export const Router = () =>
     <NewExport path='/exports/create' />
 
     <NewUser path='/users/create' />
+    <ShowUser path='/users/show' />
 
     <NewSession path='/login' />
     <DestroySession path='/logout' />

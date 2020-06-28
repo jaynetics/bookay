@@ -2,7 +2,7 @@
 import { h, Fragment } from 'preact'
 import { useState } from 'preact/hooks'
 
-export const useForm = ({ ...initialValues }) => {
+export const useForm = ({ ...initialValues } = {}) => {
   const [error, setError] = useState(null)
   const [submitting, setSubmitting] = useState(false)
   const [values, setValues] = useState(initialValues)
@@ -15,9 +15,8 @@ export const useForm = ({ ...initialValues }) => {
 }
 
 export const Form = ({
-  altButton = null,
   children = null,
-  disableOnSubmit = true,
+  disabled = false,
   error,
   headline,
   onSubmit,
@@ -36,18 +35,16 @@ export const Form = ({
         fail: (error = 'Please check your input.') => {
           setSubmitting(false)
           setError(error)
-        }
+        },
+        setSubmitting,
       })
   }}>
     <h2>{headline}</h2>
     {children}
-    <br /> <br />
-    <button disabled={disableOnSubmit && submitting} type='submit'>
+    <button disabled={disabled || submitting} type='submit'>
       {submitText}
     </button>
     {error && <small style={{ color: '#d00', paddingLeft: 12 }}>{error}</small>}
-    {' '}
-    {altButton}
   </form>
 
 Form.Input = ({ name, label, type = 'text', values = null, onChange = null }) =>
