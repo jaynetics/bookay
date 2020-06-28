@@ -315,12 +315,13 @@ section h2, h3 {
   align-content: start;
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .row > * {
   flex: 1;
   padding: 1em;
-  min-width: 500px;
+  min-width: 450px;
 }
 
 /* dragview must be part of dom in chromium browsers; move out of sight */
