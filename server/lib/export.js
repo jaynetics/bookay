@@ -4,10 +4,25 @@ const htmlEscape = require('escape-html')
 module.exports = class Export {
   constructor({ sourceFolderId }) {
     this.sourceFolderId = sourceFolderId || null
+    this.format = 'html'
+  }
+
+  async call() {
+    return {
+      data: await this.buildData(),
+      filename: await this.filename(),
+    }
+  }
+
+  buildData() {
+    if (this.format === 'html') return this.buildHTML()
+    else {
+      throw new Error(`unknown format "${this.format}"`)
+    }
   }
 
   // ugly but fast. could be even faster by building item tree upfront :)
-  async call() {
+  async buildHTML() {
     const lines = []
 
     lines.push('<!DOCTYPE NETSCAPE-Bookmark-file-1>')
@@ -44,6 +59,16 @@ module.exports = class Export {
     }
 
     toArray.push('</DL><p>')
+  }
+
+  async filename() {
+    let title = 'bookmarks'
+    if (this.sourceFolderId) {
+      const folder = await Item.findByPk(this.sourceFolderId)
+      title += `_${folder.name.toLowerCase().replace(/[^a-z0-9\-_]+/g, '-')}`
+    }
+    const dateString = (new Date()).toISOString().split('T')[0]
+    return `${title}_${dateString}.${this.format}`
   }
 }
 
