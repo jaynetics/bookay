@@ -108,7 +108,12 @@ const Body = ({ app, activeId, children, expandable, item, menuOpen, setMenuCoor
     }}
     onContextMenu={(event) => {
       event.preventDefault()
-      setMenuCoords([event.x, event.y])
+      if (touchEvent) { // this is a long press
+        toggleSelect({ item, ...app })
+      }
+      else { // this is a right click
+        setMenuCoords([event.x, event.y])
+      }
     }}
     onDblClick={openItem}
     onTouchStart={markEventAsTouchEvent}

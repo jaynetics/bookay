@@ -36,4 +36,32 @@ context('Mobile view', () => {
     cy.item('Folder 1').click()
     cy.shouldHaveItem('Inner folder')
   })
+
+  it('toggles item selection state on long press', () => {
+    cy.createItem({ type: 'folder', name: 'Folder 1' })
+
+    cy.visit('/')
+
+    cy.item('Folder 1').should('not.have.class', 'selected')
+
+    // first long press: select
+    cy.window().then(win => {
+      win.postMessage({ testEvent: 'touchstart', target: 'Folder 1' }, null)
+      cy.wait(1000)
+      win.postMessage({ testEvent: 'touchend', target: 'Folder 1' }, null)
+    })
+    cy.item('Folder 1').click()
+
+    cy.item('Folder 1').should('have.class', 'selected')
+
+    // second long press: deselect
+    cy.window().then(win => {
+      win.postMessage({ testEvent: 'touchstart', target: 'Folder 1' }, null)
+      cy.wait(1000)
+      win.postMessage({ testEvent: 'touchend', target: 'Folder 1' }, null)
+    })
+    cy.item('Folder 1').click()
+
+    cy.item('Folder 1').should('not.have.class', 'selected')
+  })
 })
