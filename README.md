@@ -11,7 +11,7 @@ However, if you use multiple browsers, or switch your browser from time to time,
 ## Features
 
 - easy deployment
-- customizable browser plugin
+- customizable, keyboard-friendly browser plugin
 - lightweight web app
 - support for nested folders
 - data import and export
