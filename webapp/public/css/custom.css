@@ -216,7 +216,7 @@ section h2, h3 {
   width: 75vw;
 }
 
-.folder-content.without-tree {
+.folder-content:not(.with-tree) {
   margin: auto;
 }
 
@@ -322,6 +322,18 @@ section h2, h3 {
   flex: 1;
   padding: 1em;
   min-width: 450px;
+}
+
+.folder-browser {
+  background-color: #f9f9f9;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 2.5em; /* nav height */
+}
+
+.folder-browser .headline {
+  margin-bottom: 0;
 }
 
 /* dragview must be part of dom in chromium browsers; move out of sight */

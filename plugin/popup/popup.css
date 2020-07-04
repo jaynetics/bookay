@@ -9,6 +9,10 @@ div {
   margin: 0;
 }
 
+body {
+  font-size: 12px;
+}
+
 /* popup styles */
 
 html,
@@ -36,7 +40,6 @@ a:visited {
   cursor: pointer;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   font-size: 1.5em;
-  height: 38px;
   line-height: 1.5em;
   width: 100%;
 }

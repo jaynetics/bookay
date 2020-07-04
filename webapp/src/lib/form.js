@@ -11,7 +11,7 @@ export const useForm = ({ ...initialValues } = {}) => {
     [e.target.name]: e.target.value || e.target.checked,
   })
 
-  return { error, setError, onChange, submitting, setSubmitting, values }
+  return { error, setError, onChange, submitting, setSubmitting, values, setValues }
 }
 
 export const Form = ({

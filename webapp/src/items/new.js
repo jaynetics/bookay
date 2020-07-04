@@ -5,7 +5,7 @@ import { Form, flash, getHashParam, useForm } from '../lib'
 import { FolderSelect, client } from '../shared'
 import { Item } from './item'
 
-export const NewItem = ({ path }) => {
+export const NewItem = (props) => {
   const form = useForm({
     type: getHashParam('type') || 'url',
     name: getHashParam('name'),
@@ -21,7 +21,7 @@ export const NewItem = ({ path }) => {
     <div style={{ height: 16 }} />
     <Form.Input name='name' label='Name' {...form} />
     {form.values.type === 'url' && <Form.Input name='url' label='URL' {...form} />}
-    <FolderSelect name='folderId' label='Parent folder' {...form} />
+    <FolderSelect label='Parent folder' routing={props} {...form} />
   </Form >
 }
 

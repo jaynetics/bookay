@@ -7,7 +7,7 @@ export const SearchResult = (props) => {
   const { q } = props.matches
   const { data } = useAPI(client.getAll({ filter: { q } }), [q])
 
-  return <section className='folder-content without-tree scroll-section'>
+  return <section className='folder-content scroll-section'>
     <h2 className='headline'>
       {data ? `${data.length} results for ${q}` : 'Searching…'}
     </h2>

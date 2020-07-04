@@ -15,13 +15,21 @@ export const Router = () =>
     <Dashboard path='/folders/:id' />
 
     <EditItem path='/items/:id' />
+    <EditItem path='/items/:id/in/:folderId?' />
+
     <ItemHealth path='/health' />
+
     <NewItem path='/items/create' />
+    <NewItem path='/items/create/in/:folderId?' />
+
     <SearchResult path='/search/:q' />
     <RecentItems path='/recent' />
 
     <NewImport path='/imports/create' />
+    <NewImport path='/imports/create/in/:folderId?' />
+
     <NewExport path='/exports/create' />
+    <NewExport path='/exports/create/in/:folderId?' />
 
     <NewUser path='/users/create' />
     <ShowUser path='/users/show' />

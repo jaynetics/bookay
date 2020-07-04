@@ -3,7 +3,7 @@ import { h } from 'preact'
 import { Form, useForm } from '../lib'
 import { FolderSelect, client } from '../shared'
 
-export const NewExport = ({ path }) => {
+export const NewExport = (props) => {
   const form = useForm({})
 
   return <Form
@@ -12,7 +12,7 @@ export const NewExport = ({ path }) => {
     submitText='Download'
     {...form}
   >
-    <FolderSelect name='folderId' label='Folder' rootLabel='All' {...form} />
+    <FolderSelect label='Folder' rootLabel='All' routing={props} {...form} />
   </Form>
 }
 

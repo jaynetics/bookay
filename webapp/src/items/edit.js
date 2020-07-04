@@ -8,18 +8,19 @@ import { Item } from './item'
 export const EditItem = (props) => {
   const { id } = props.matches
   const { data } = useAPI(client.get({ id }), [id])
+  if (!data) return <Loader />
 
-  return data ? <EditItemForm id={id} {...data} /> : <Loader />
+  return <EditItemForm routing={props} {...data} />
 }
 
-const EditItemForm = ({ ...values }) => {
+const EditItemForm = ({ routing, ...values }) => {
   const form = useForm(values)
   const headline = `Edit ${Item.typeName(values.type)}`
 
   return <Form headline={headline} onSubmit={onSubmit} {...form} >
     <Form.Input name='name' label='Name' {...form} />
     {values.type === 'url' && <Form.Input name='url' label='URL' {...form} />}
-    <FolderSelect name='folderId' label='Parent folder' {...form} />
+    <FolderSelect label='Parent folder' routing={routing} {...form} />
   </Form>
 }
 

@@ -50,7 +50,6 @@ context('Creating items', () => {
     cy.createItem({ type: 'folder', name: 'Folder 1' })
     cy.visit('/#/items/create')
 
-    // last-viewed folder should be preselected
     cy.contains('Folder').click()
     cy.get('[name=name]').type('Nested folder')
     cy.get('[name=folderId]').select('Folder 1').wait(1)
@@ -59,6 +58,23 @@ context('Creating items', () => {
     cy.visit('/')
     cy.item('Folder 1').dblclick()
     cy.shouldHaveItem('Nested folder')
+  })
+
+  it('allows adding items to a folder chosen by browsing', () => {
+    cy.createItem({
+      type: 'folder', name: 'Folder 1', children: [
+        { type: 'folder', name: 'Folder 2' }
+      ]
+    })
+    cy.visit('/#/items/create')
+
+    cy.contains('Folder').click()
+    cy.get('[name=name]').type('Nested folder')
+    cy.contains('Browse folders').click()
+    cy.item('Folder 1').click()
+    cy.item('Folder 2').click()
+    cy.contains('Choose this folder').click().wait(1)
+    cy.get('[name=folderId] :selected').should('have.text', 'Folder 2')
   })
 
   it('supports URL params', () => {

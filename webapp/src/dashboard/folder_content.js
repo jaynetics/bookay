@@ -15,7 +15,7 @@ export const FolderContent = ({ id }) => {
   const { data, loading } =
     useAPI(client.getAll({ filter: { folderId: id } }), [id])
 
-  return <section className='folder-content scroll-section'>
+  return <section className='folder-content scroll-section with-tree'>
     <h2 className='headline'>{name}</h2>
     <Content atRoot={!id} items={data} loading={loading} />
   </section>

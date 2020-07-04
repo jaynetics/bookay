@@ -7,7 +7,7 @@ export const ContextMenu = ({
   children,
   coords,
   setCoords,
-  zIndex = 10001,
+  zIndex = 11000,
 }) => {
   useEffect(() => {
     const exit = () => setCoords(null)

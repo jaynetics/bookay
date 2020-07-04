@@ -2,7 +2,7 @@
 import { h } from 'preact'
 import { useState, useContext } from 'preact/hooks'
 import { route } from 'preact-router'
-import { ContextMenu, EventTestHelper, classNames } from '../lib'
+import { ContextMenu, EventTestHelper, classNames, truncate } from '../lib'
 import { AppContext } from '../app/index'
 import { ItemContextMenu } from './context_menu'
 import { move, openURL, toggleSelect } from './actions'
@@ -11,6 +11,7 @@ export const Item = ({
   activeId = null,
   expandable = false,
   item,
+  onClick = null,
   showMenuButton = false,
 }) => {
   const [expanded, setExpanded] = useState(false)
@@ -27,8 +28,9 @@ export const Item = ({
       app={app}
       expandable={expandable}
       item={item}
-      menuOpen={!!menuCoords}
+      onClick={onClick}
       setMenuCoords={setMenuCoords}
+      showingMenu={!!menuCoords}
     >
       <Icon
         app={app}
@@ -67,21 +69,30 @@ const Wrapper = ({ app, children, item }) =>
     className={classNames({
       item: true,
       cut: app.idsToCut.includes(item.id),
-      selected: app.selectedIds.includes(item.id)
+      selected: app.selectedIds.includes(item.id),
     })}
     {...dragAndDropBehavior({ item, selectedIds: app.selectedIds })}
   >
     {children}
   </div>
 
-const Body = ({ app, activeId, children, expandable, item, menuOpen, setMenuCoords }) => {
+const Body = ({
+  app,
+  activeId,
+  children,
+  expandable,
+  item,
+  onClick,
+  setMenuCoords,
+  showingMenu,
+}) => {
   const [touchEvent, setTouchEvent] = useState(false)
   const markEventAsTouchEvent = () => setTouchEvent(true)
 
-  const active = item.id === activeId || menuOpen
+  const active = item.id === activeId || showingMenu
 
   const openItem = () => {
-    if (ContextMenu.closeAll()) return false
+    if (ContextMenu.closeAll()) return
     else if (item.type === 'folder') route(`/folders/${item.id}`)
     else if (item.type === 'url') openURL(item.url)
   }
@@ -89,14 +100,20 @@ const Body = ({ app, activeId, children, expandable, item, menuOpen, setMenuCoor
   return <a
     className={classNames({ 'item-body': true, active })}
     href={item.url || `/#/folders/${item.id}`}
-    native // disables automatic preact-router routing for this tag
+    // `native` disables automatic preact-router routing for this tag.
+    // It is disabled so that we can use non-app URLs as href and open
+    // bookmarks in a new tab, e.g. by using modifier keys.
+    native
     onClick={(event) => {
       // use href attribute if any new tab / window modifier is pressed
       if (event.metaKey || event.ctrlKey || event.shiftKey) return
 
       event.preventDefault()
 
-      // open item directly on touch or if it is expandable
+      // use custom onClick handler if given
+      if (onClick) return onClick(event, item)
+
+      // open item directly on touch or if it is expandable (i.e. in tree view)
       if (expandable || touchEvent) {
         if (touchEvent) setTouchEvent(false)
         openItem()
@@ -108,14 +125,14 @@ const Body = ({ app, activeId, children, expandable, item, menuOpen, setMenuCoor
     }}
     onContextMenu={(event) => {
       event.preventDefault()
-      if (touchEvent) { // this is a long press
+      if (touchEvent) { // this is actually a long press / hard touch event
         toggleSelect({ item, ...app })
       }
       else { // this is a right click
         setMenuCoords([event.x, event.y])
       }
     }}
-    onDblClick={openItem}
+    onDblClick={onClick ? undefined : openItem}
     onTouchStart={markEventAsTouchEvent}
   >
     {children}
@@ -205,15 +222,17 @@ const draggableBehavior = ({ item, selectedIds }) => ({
     // we are moving, not copying, but 'move' doesn't show a helpful cursor
     e.dataTransfer.effectAllowed = 'copy'
 
-    // move the whole current selection iff the dragged item is part of it
+    // move the whole current selection if the dragged item is part of it,
+    // else move only the dragged item itself.
     const ids = selectedIds.includes(item.id) ? selectedIds : [item.id]
     e.dataTransfer.setData('application/json', JSON.stringify(ids))
+
     // this allows dragging into, e.g., a browser's tab bar to open a new tab
     item.url && e.dataTransfer.setData('text/uri-list', item.url)
 
     // show a preview while dragging
     const text = ids.length === 1 ?
-      `${item.name.substring(0, 20)}${item.name.length > 20 ? '…' : ''}` :
+      `${truncate(item.name, 20)}` :
       `[${ids.length} items]`
     const view = buildDragPreview({ text })
     e.dataTransfer.setDragImage(view, 0, view.height)

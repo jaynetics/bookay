@@ -7,6 +7,12 @@ div {
   margin: 0;
 }
 
+body {
+  font-size: 12px;
+}
+
+/* options form */
+
 .container {
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
