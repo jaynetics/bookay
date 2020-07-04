@@ -8,11 +8,23 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       validate: {
         async function(value, next) {
-          if (!value) next()
-          const newParent = await Item.findByPk(value)
-          const type = newParent && newParent.type
-          if (type !== 'folder') next(`Can only nest in folder, not ${type}`)
-          else next()
+          // disallow cyclic nesting and nesting in non-folders
+          let ancestor = value && await Item.findByPk(value)
+          while (ancestor) {
+            const { folderId: gpId, type } = ancestor
+            if (type !== 'folder') {
+              return next(`Can only nest in folder, not ${type}`)
+            }
+            else if (this.type !== 'folder') {
+              return next() // cyclicity only affects folders
+            }
+            else if (gpId && gpId === this.id) {
+              return next('Cannot nest in a contained folder')
+            }
+            ancestor = gpId && await Item.findByPk(gpId)
+          }
+
+          next()
         }
       }
     },

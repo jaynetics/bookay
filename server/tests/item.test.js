@@ -22,4 +22,15 @@ describe('Item', () => {
 
     expect(f1.updatedAt.getTime()).toBeGreaterThan(oldUpdatedAt.getTime())
   })
+
+  it('prevents cyclic nesting', async () => {
+    const f1 = await Item.create({ name: 'Folder 1', type: 'folder', userId })
+    const f2 = await Item.create({ name: 'Folder 2', type: 'folder', userId, folderId: f1.id })
+    const f3 = await Item.create({ name: 'Folder 3', type: 'folder', userId, folderId: f2.id })
+
+    expect.assertions(1)
+    return f1.update({ folderId: f3.id }).catch((e) => expect(e.message).toEqual(
+      'Validation error: Cannot nest in a contained folder'
+    ))
+  })
 })
