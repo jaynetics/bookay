@@ -2,7 +2,7 @@
 
 This is a frontend for managing your bookmarks.
 
-# How to use
+## How to use
 
 This is automatically served by the [server](../server/README.md).
 
