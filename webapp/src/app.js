@@ -1,11 +1,13 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
-import { AppContext, GlobalFlashMessage, Nav, Router } from './app/index'
+import { AppContext, GlobalFlashMessage, Nav, RouteSwitch } from './app/index'
+import { HashRouter } from './lib'
 
 const App = () => {
   const [changesById, setChangesById] = useState({})
   const [idsToCut, setIdsToCut] = useState([])
+  const [search, setSearch] = useState('')
   const [selectedIds, setSelectedIds] = useState([])
 
   const broadcastChange = ({ id, ...change }) => {
@@ -16,13 +18,16 @@ const App = () => {
   return <AppContext.Provider value={{
     changesById, broadcastChange,
     idsToCut, setIdsToCut,
+    search, setSearch,
     selectedIds, setSelectedIds,
   }}>
-    <Nav />
-    <main>
-      <Router />
-    </main>
-    <GlobalFlashMessage />
+    <HashRouter>
+      <Nav />
+      <main>
+        <RouteSwitch />
+      </main>
+      <GlobalFlashMessage />
+    </HashRouter>
   </AppContext.Provider>
 }
 

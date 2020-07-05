@@ -1,10 +1,9 @@
 /** @jsx h */
 import { h } from 'preact'
-import { route } from 'preact-router'
-import { Form, flash, useForm } from '../lib'
+import { Form, flash, route, useForm } from '../lib'
 import { client } from '../shared'
 
-export const ShowUser = ({ path }) =>
+export const ShowUser = () =>
   <section className='row'>
     <ChangePasswordForm />
     <DeleteAccountForm />

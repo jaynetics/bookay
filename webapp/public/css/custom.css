@@ -87,6 +87,9 @@ nav {
   border: none;
   padding: .6em / 2 .6em * 1.5;
 }
+.menu > a.active {
+  background-color: #982c61;
+}
 .menu.open ~ .burger {
   background-color: rgba(0, 0, 0, .2);
   border-radius: 0;
@@ -324,7 +327,7 @@ section h2, h3 {
   min-width: 450px;
 }
 
-.folder-browser {
+.modal {
   background-color: #f9f9f9;
   left: 0;
   position: absolute;
@@ -332,7 +335,7 @@ section h2, h3 {
   top: 2.5em; /* nav height */
 }
 
-.folder-browser .headline {
+.modal .headline {
   margin-bottom: 0;
 }
 
@@ -501,7 +504,11 @@ section h2, h3 {
   .nav-button:hover {
     color: #fff;
   }
-  .flash-message {
+  .menu > a.active {
+    background-color: #c9c9c9;
+  }
+  .flash-message,
+  .modal {
     background-color: #222;
   }
   .scroll-section::after {

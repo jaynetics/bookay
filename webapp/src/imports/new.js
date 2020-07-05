@@ -1,7 +1,6 @@
 /** @jsx h */
 import { h, createRef } from 'preact'
-import { route } from 'preact-router'
-import { Form, flash, useForm } from '../lib'
+import { Form, flash, route, useForm } from '../lib'
 import { FolderSelect, client } from '../shared'
 
 export const NewImport = (props) => {
@@ -16,7 +15,7 @@ export const NewImport = (props) => {
   >
     <label for='file'>Choose a file (e.g. bookmarks.html - you can export this from your browser):</label>
     <input id='file' type='file' ref={fileInput} style={{ width: '100%' }} />
-    <FolderSelect label='Target folder' routing={props} {...form} />
+    <FolderSelect label='Target folder' {...form} />
   </Form >
 }
 

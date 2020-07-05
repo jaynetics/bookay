@@ -3,7 +3,7 @@ import { h } from 'preact'
 import { Loader, client, useAPI } from '../shared'
 import { Item } from './item'
 
-export const RecentItems = ({ path }) => {
+export const RecentItems = () => {
   const { data } = useAPI(
     client.getAll({ filter: { type: 'url' }, sort: ['createdAt', 'DESC'] })
   )

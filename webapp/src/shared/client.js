@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'preact/hooks'
-import { route } from 'preact-router'
 import { ApiClient } from '@bookay/client'
-import { getHashParam } from '../lib'
+import { currentSearch, route } from '../lib'
 
 export const client = new ApiClient({
   onAuthRequired: () => route(`/login?returnTo=${returnTo()}`),
@@ -29,6 +28,6 @@ export const useAPI = (call, deps = []) => {
 
 const returnTo = () => {
   let path = window.location.hash.slice(1)
-  if (/login|logout/.test(path)) path = getHashParam('returnTo') || ''
+  if (/login|logout/.test(path)) path = currentSearch().get('returnTo') || ''
   return encodeURIComponent(path)
 }

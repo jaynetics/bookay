@@ -1,10 +1,9 @@
 /** @jsx h */
 import { h } from 'preact'
-import { route } from 'preact-router'
-import { Form, flash, useForm, getHashParam } from '../lib'
+import { Form, currentSearch, flash, useForm, route } from '../lib'
 import { client } from '../shared'
 
-export const NewSession = ({ path }) => {
+export const NewSession = () => {
   const form = useForm({})
 
   return <Form
@@ -22,7 +21,7 @@ const onSubmit = ({ username, password }, { fail }) => {
   client.login({ username, password })
     .then(() => {
       flash('Logged in!')
-      route(decodeURIComponent(getHashParam('returnTo') || '/'))
+      route(decodeURIComponent(currentSearch().get('returnTo') || '/'))
     })
     .catch(() => fail('Wrong!'))
 }

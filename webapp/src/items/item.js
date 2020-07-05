@@ -1,8 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState, useContext } from 'preact/hooks'
-import { route } from 'preact-router'
-import { ContextMenu, EventTestHelper, classNames, truncate } from '../lib'
+import { ContextMenu, EventTestHelper, classNames, route, truncate } from '../lib'
 import { AppContext } from '../app/index'
 import { ItemContextMenu } from './context_menu'
 import { move, openURL, toggleSelect } from './actions'
@@ -100,13 +99,10 @@ const Body = ({
   return <a
     className={classNames({ 'item-body': true, active })}
     href={item.url || `/#/folders/${item.id}`}
-    // `native` disables automatic preact-router routing for this tag.
-    // It is disabled so that we can use non-app URLs as href and open
-    // bookmarks in a new tab, e.g. by using modifier keys.
-    native
     onClick={(event) => {
       // use href attribute if any new tab / window modifier is pressed
-      if (event.metaKey || event.ctrlKey || event.shiftKey) return
+      if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey ||
+        event.button !== 0) return
 
       event.preventDefault()
 

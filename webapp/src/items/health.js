@@ -4,7 +4,7 @@ import { client, useAPI, Loader } from '../shared'
 import { Item } from './item'
 import { useState } from 'preact/hooks'
 
-export const ItemHealth = ({ path }) => {
+export const ItemHealth = () => {
   const { data } = useAPI(client.getStats())
   const [scanBroken, setScanBroken] = useState(false)
   if (!data) return <Loader />

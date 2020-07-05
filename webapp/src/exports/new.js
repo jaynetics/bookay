@@ -12,7 +12,7 @@ export const NewExport = (props) => {
     submitText='Download'
     {...form}
   >
-    <FolderSelect label='Folder' rootLabel='All' routing={props} {...form} />
+    <FolderSelect label='Folder' rootLabel='All' {...form} />
   </Form>
 }
 

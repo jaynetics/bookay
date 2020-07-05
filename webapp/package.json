@@ -14,11 +14,10 @@
   },
   "dependencies": {
     "@bookay/client": "../client",
-    "history": "^4.10.1",
     "performant-array-to-tree": "^1.7.1",
     "preact": "^10.4.1",
-    "preact-router": "^3.2.1",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^3.4.1",
+    "wouter-preact": "^2.4.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

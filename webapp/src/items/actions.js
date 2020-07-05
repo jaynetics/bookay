@@ -1,7 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
-import { route } from 'preact-router'
-import { copyToClipboard, flash } from '../lib'
+import { copyToClipboard, flash, route } from '../lib'
 import { client } from '../shared'
 
 // item action buttons

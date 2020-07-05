@@ -1,26 +1,25 @@
 /** @jsx h */
 import { h } from 'preact'
-import { route } from 'preact-router'
-import { Form, flash, useForm } from '../lib'
+import { Form, flash, route, useForm } from '../lib'
 import { FolderSelect, Loader, client, useAPI } from '../shared'
 import { Item } from './item'
 
-export const EditItem = (props) => {
-  const { id } = props.matches
+export const EditItem = ({ params }) => {
+  const { id } = params
   const { data } = useAPI(client.get({ id }), [id])
   if (!data) return <Loader />
 
-  return <EditItemForm routing={props} {...data} />
+  return <EditItemForm {...data} />
 }
 
-const EditItemForm = ({ routing, ...values }) => {
+const EditItemForm = ({ ...values }) => {
   const form = useForm(values)
   const headline = `Edit ${Item.typeName(values.type)}`
 
   return <Form headline={headline} onSubmit={onSubmit} {...form} >
     <Form.Input name='name' label='Name' {...form} />
     {values.type === 'url' && <Form.Input name='url' label='URL' {...form} />}
-    <FolderSelect label='Parent folder' routing={routing} {...form} />
+    <FolderSelect blockedIds={[values.id]} label='Parent folder' {...form} />
   </Form>
 }
 

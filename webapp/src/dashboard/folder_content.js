@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useEffect, useContext, useState } from 'preact/hooks'
+import { Link } from '../lib'
 import { Loader, client, useAPI } from '../shared'
 import { Item } from '../items'
 import { AppContext } from '../app/index'
@@ -46,5 +47,5 @@ const ImportBookmarksHint = () =>
   <div>
     <p>Welcome!</p>
     <p>You have no bookmarks yet.</p>
-    <p>Would you like to <a href='/imports/create'>import your existing bookmarks</a>?</p>
+    <p>Would you like to <Link to='/imports/create'>import your existing bookmarks</Link>?</p>
   </div>

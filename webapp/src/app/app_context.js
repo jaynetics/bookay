@@ -7,6 +7,9 @@ export const AppContext = createContext({
   idsToCut: [],
   setIdsToCut: (_) => undefined,
 
+  search: '',
+  setSearch: (_) => undefined,
+
   selectedIds: [],
   setSelectedIds: (_) => undefined,
 })

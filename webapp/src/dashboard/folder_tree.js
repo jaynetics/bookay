@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
-import { route } from 'preact-router'
 import { arrayToTree } from 'performant-array-to-tree'
+import { Link, route } from '../lib'
 import { client, useAPI } from '../shared'
 import { Item } from '../items'
 import { useMemo } from 'preact/hooks'
@@ -21,6 +21,6 @@ const treeify = (items) =>
 
 const Content = ({ activeId, tree }) => {
   if (!tree) return null
-  if (!tree.length) return <a href='/items/create?type=folder'>Create a folder</a>
+  if (!tree.length) return <Link to='/items/create?type=folder'>Create a folder</Link>
   return <Item.List activeId={activeId} items={tree} expandable={true} />
 }

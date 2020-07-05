@@ -1,10 +1,12 @@
 /** @jsx h */
 import { h } from 'preact'
+import { useContext } from 'preact/hooks'
+import { AppContext } from '../app/index'
 import { Loader, client, useAPI } from '../shared'
 import { Item } from './item'
 
-export const SearchResult = (props) => {
-  const { q } = props.matches
+export const SearchResult = () => {
+  const { search: q } = useContext(AppContext)
   const { data } = useAPI(client.getAll({ filter: { q } }), [q])
 
   return <section className='folder-content scroll-section'>

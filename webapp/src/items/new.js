@@ -1,16 +1,16 @@
 /** @jsx h */
 import { h } from 'preact'
-import { route } from 'preact-router'
-import { Form, flash, getHashParam, useForm } from '../lib'
+import { Form, currentSearch, flash, route, useForm, } from '../lib'
 import { FolderSelect, client } from '../shared'
 import { Item } from './item'
 
 export const NewItem = (props) => {
+  const search = currentSearch()
   const form = useForm({
-    type: getHashParam('type') || 'url',
-    name: getHashParam('name'),
-    folderId: getHashParam('folderId'),
-    url: getHashParam('url'),
+    type: search.get('type') || 'url',
+    name: search.get('name'),
+    folderId: search.get('folderId'),
+    url: search.get('url'),
   })
 
   const headline = `Create new ${Item.typeName(form.values.type)}`
@@ -21,7 +21,7 @@ export const NewItem = (props) => {
     <div style={{ height: 16 }} />
     <Form.Input name='name' label='Name' {...form} />
     {form.values.type === 'url' && <Form.Input name='url' label='URL' {...form} />}
-    <FolderSelect label='Parent folder' routing={props} {...form} />
+    <FolderSelect label='Parent folder' {...form} />
   </Form >
 }
 

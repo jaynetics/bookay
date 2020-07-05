@@ -79,7 +79,7 @@ context('Plugin popup', () => {
   it('has a link to the webapp', () => {
     cy.showPluginElement('popup')
     cy.contains('Manage').click()
-    cy.url().should('match', new RegExp('/#/$'))
+    cy.get('nav').should('exist')
   })
 
   it('shows recent bookmarks if there are any', () => {

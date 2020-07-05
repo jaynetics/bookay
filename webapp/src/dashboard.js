@@ -3,8 +3,8 @@ import { h } from 'preact'
 import { ForResolution } from './lib'
 import { FolderContent, FolderTree, MobileFolderSelect } from './dashboard/index'
 
-export const Dashboard = (props) => {
-  const activeId = parseInt(props.matches.id) || null
+export const Dashboard = ({ params }) => {
+  const activeId = parseInt(params.id) || null
 
   return <div className='dashboard'>
     <ForResolution above={684}>
