@@ -3,7 +3,7 @@ import { Fragment, createRef, h } from 'preact'
 import { useEffect, useState, useContext } from 'preact/hooks'
 import { Link, classNames, flash, route, useDebouncedCallback } from '../lib'
 import { useRoute } from 'wouter-preact'
-import { AppContext } from './'
+import { AppContext } from './app_context'
 
 export const Nav = () => {
   const [open, setOpen] = useState(false)
