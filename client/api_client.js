@@ -89,13 +89,17 @@ export class ApiClient {
     return this.fetch(this.usersURL(), { method: 'POST', body })
   }
 
-  changePassword({ newPassword, oldPassword }) {
-    const body = JSON.stringify({ newPassword, oldPassword })
-    return this.fetch(this.usersURL(), { method: 'PUT', body })
+  getUser() {
+    return this.fetch(this.userURL())
+  }
+
+  updateUser({ ...updateBody }) {
+    const body = JSON.stringify(updateBody)
+    return this.fetch(this.userURL(), { method: 'PUT', body })
   }
 
   deleteAccount() {
-    return this.fetch(this.usersURL(), { method: 'DELETE' })
+    return this.fetch(this.userURL(), { method: 'DELETE' })
   }
 
   getStats() {
@@ -203,6 +207,10 @@ export class ApiClient {
 
   exportURL({ folderId }) {
     return `${this.serviceURL}/api/export${this.toQuery({ folderId })}`
+  }
+
+  userURL() {
+    return `${this.serviceURL}/api/user`
   }
 
   usersURL() {

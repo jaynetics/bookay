@@ -24,3 +24,47 @@ describe('POST /api/users', () => {
     expect(await User.count({ where: { username: 'new user' } })).toBe(1)
   })
 })
+
+describe('GET /api/user', () => {
+  it('should return 401 without logged in user', async () => {
+    const response = await request(app).get('/api/user')
+    expect(response.status).toBe(401)
+  })
+
+  it('should return the username and settings', async () => {
+    const response = await request(app).get('/api/user').set(auth)
+    expect(response.status).toBe(200)
+    expect(response.body.username).toBe('Sonia')
+    expect(response.body.settings).toMatchObject({})
+  })
+})
+
+describe('PUT /api/user', () => {
+  it('should return 401 without logged in user', async () => {
+    const response = await request(app).put('/api/user')
+      .send({ settings: { foo: 'bar' } })
+    expect(response.status).toBe(401)
+  })
+
+  it('allows updating settings', async () => {
+    const response = await request(app).put('/api/user')
+      .send({ settings: { foo: 'bar' } }).set(auth)
+    expect(response.status).toBe(200)
+    await user.reload()
+    expect(user.settings).toMatchObject({ foo: 'bar' })
+  })
+
+  it('should return 403 when trying to set new pw without old pw', async () => {
+    const response = await request(app).put('/api/user')
+      .send({ newPassword: 'foo' }).set(auth)
+    expect(response.status).toBe(403)
+  })
+})
+
+describe('DELETE /api/user', () => {
+  it('should return 401 without logged in user', async () => {
+    const response = await request(app).put('/api/user')
+      .send({ settings: { foo: 'bar' } })
+    expect(response.status).toBe(401)
+  })
+})

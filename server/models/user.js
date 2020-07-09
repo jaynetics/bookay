@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const bcrypt = require('bcrypt')
 const bcryptLevel = process.env.NODE_ENV === 'test' ? 1 : 10
@@ -12,8 +12,20 @@ module.exports = (sequelize, DataTypes) => {
         this.setDataValue('password', bcrypt.hashSync(value, bcryptLevel))
       }
     },
+    settings: {
+      type: DataTypes.TEXT,
+      get() {
+        let value
+        try { value = JSON.parse(this.getDataValue('settings')) } catch (_) { }
+        return { ...DEFAULT_SETTINGS, ...value }
+      },
+      set({ ...value }) {
+        this.setDataValue('settings', JSON.stringify(value))
+      },
+    },
     sessionId: DataTypes.STRING,
-  }, {});
+  }, {})
+
   User.associate = function (models) {
     User.hasMany(models.Item, {
       as: 'items',
@@ -27,5 +39,9 @@ module.exports = (sequelize, DataTypes) => {
     return bcrypt.compareSync(password, this.password)
   }
 
-  return User;
-};
+  return User
+}
+
+const DEFAULT_SETTINGS = {
+  faviconSource: 'ddg',
+}

@@ -34,8 +34,9 @@ router.get('/api/health_check', ctrl.HealthChecksController.show)
 router.post('/api/items/:id/dissolve', ctrl.DissolutionsController.create)
 router.post('/api/imports', ctrl.ImportsController.create)
 router.get('/api/stats', ctrl.StatsController.show)
-router.put('/api/users', ctrl.UsersController.update)
-router.delete('/api/users', ctrl.UsersController.destroy)
+router.get('/api/user', ctrl.UsersController.show)
+router.put('/api/user', ctrl.UsersController.update)
+router.delete('/api/user', ctrl.UsersController.destroy)
 
 
 module.exports = router

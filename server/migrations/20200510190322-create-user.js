@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
@@ -17,6 +17,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      settings: {
+        type: Sequelize.TEXT
+      },
       sessionId: {
         type: Sequelize.STRING
       },
@@ -28,9 +31,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Users')
   }
-};
+}

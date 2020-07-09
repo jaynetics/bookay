@@ -13,17 +13,29 @@ const create = async (req, res) => {
 
   User.create({ username, password })
     .then(() => res.status(201).send({}))
-    .catch((e) => res.status(400).send({}))
+    .catch(() => res.status(400).send({}))
+}
+
+const show = async (req, res) => {
+  const { settings, username } = req.user
+
+  res.status(200).send({ settings, username })
 }
 
 const update = async (req, res) => {
-  const { body: { newPassword, oldPassword }, user } = req
+  const { body: { newPassword, oldPassword, settings }, user } = req
 
-  if (!user.validPassword(oldPassword)) {
-    return res.status(403).send({})
+  if (newPassword) {
+    if (!user.validPassword(oldPassword || '')) {
+      return res.status(403).send({})
+    }
+    await user.update({ password: newPassword })
   }
 
-  await user.update({ password: newPassword })
+  if (settings) {
+    await user.update({ settings })
+  }
+
   res.status(200).send({})
 }
 
@@ -32,4 +44,4 @@ const destroy = async (req, res) => {
   res.status(200).send({})
 }
 
-module.exports = { create, destroy, update }
+module.exports = { create, destroy, show, update }

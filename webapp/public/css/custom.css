@@ -245,6 +245,12 @@ section h2, h3 {
   width: 28px;
 }
 
+.item-icon .favicon {
+  padding-bottom: 1px;
+  vertical-align: text-bottom;
+  width: 16px;
+}
+
 .item-name,
 .item-info {
   color: #2c8898;

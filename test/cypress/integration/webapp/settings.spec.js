@@ -1,12 +1,29 @@
 /// <reference path="../../support/index.d.ts" />
 
-context('My account', () => {
+context('Settings', () => {
+  it('allows changing settings', () => {
+    cy.visit('/#/settings')
+    cy.get('[name=faviconSource] :selected').should('have.text', 'Disabled')
+    cy.get('[name=faviconSource]')
+      .select('Google').wait(100)
+      .siblings('button').contains('Save').click()
+    cy.shouldFlash('Saved')
+
+    cy.visit('/#/settings')
+    cy.get('[name=faviconSource] :selected').should('have.text', 'Google')
+
+    // restore old state
+    cy.get('[name=faviconSource]')
+      .select('Disabled').wait(100)
+      .siblings('button').contains('Save').click()
+  })
+
   it('allows changing the password', () => {
-    cy.visit('/#/users/show')
+    cy.visit('/#/settings')
     cy.get('[name=oldPassword]').type('pw')
     cy.get('[name=newPassword]').type('nupw')
-    cy.contains('button', 'Save').click()
-    cy.shouldFlash('changed')
+      .siblings('button').contains('Save').click()
+    cy.shouldFlash('Saved')
 
     // old password should no longer work
     cy.visit('/#/logout')
@@ -18,8 +35,8 @@ context('My account', () => {
   })
 
   it('allows deleting the account', () => {
-    cy.visit('/#/users/show')
-    cy.get('[name=confirmation]').type('delete everything')
+    cy.visit('/#/settings')
+    cy.get('[name=confirmation]').type('Sonia')
     cy.contains('button', 'Delete').click()
     cy.shouldFlash('Goodbye')
     cy.url().should('contain', '/#/login')

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const Item = sequelize.define('Item', {
     type: DataTypes.STRING,
@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     info: DataTypes.VIRTUAL,
-  }, {});
+  }, {})
+
   Item.associate = function (models) {
     Item.hasMany(Item, {
       as: 'children',
@@ -44,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'NO ACTION',
     })
   }
+
   Item.afterCreate(async function markParentFolderAsRecentlyUsed(item) {
     if (item.type !== 'folder' && item.folderId) {
       // https://github.com/sequelize/sequelize/issues/3759 prevents simply doing
@@ -53,5 +55,6 @@ module.exports = (sequelize, DataTypes) => {
       folder.save()
     }
   })
-  return Item;
-};
+
+  return Item
+}

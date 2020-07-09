@@ -18,7 +18,7 @@ context('Editing items', () => {
 
       cy.contains('Browse folders').click()
       cy.item('Folder 2').click()
-      cy.contains('Choose this folder').click().wait(1)
+      cy.contains('Choose this folder').click().wait(100)
       cy.get('[name=folderId] :selected').should('have.text', 'Folder 2')
     })
   })

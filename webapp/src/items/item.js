@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
-import { useState, useContext } from 'preact/hooks'
+import { useState, useContext, useEffect } from 'preact/hooks'
 import { ContextMenu, EventTestHelper, classNames, route, truncate } from '../lib'
 import { AppContext } from '../app/index'
 import { ItemContextMenu } from './context_menu'
@@ -138,6 +138,7 @@ const Body = ({
 
 const Icon = ({ app, expandable, expanded, item, setExpanded, }) => {
   const selected = app.selectedIds.includes(item.id)
+  const faviconSource = app.user && app.user.settings.faviconSource
 
   let accessory = null
   if (selected) accessory = '✓'
@@ -153,15 +154,17 @@ const Icon = ({ app, expandable, expanded, item, setExpanded, }) => {
       setExpanded(!expanded)
     }
   }}>
-    <span className={classNames({
+    <div className={classNames({
       'item-accessory': true,
       'item-expansion-toggle': expandable,
     })}>
       {accessory}
-    </span>
-    <span className='item-icon' role='img' aria-label='Icon'>
-      {item.type === 'folder' ? <FolderIcon /> : '★'}
-    </span>
+    </div>
+    <div className='item-icon' role='img' aria-label='Icon'>
+      {item.type === 'folder' ?
+        <FolderIcon /> :
+        <URLIcon faviconSource={faviconSource} url={item.url} />}
+    </div>
   </div>
 }
 
@@ -172,6 +175,33 @@ const FolderIcon = () =>
       <path stroke='none' d='M 259.7344,369.5625 H 28.5469 V 196.0312 l 18.5625,-27.9843 h 57.5156 l 17.0156,27.9843 h 138.0938 z' />
     </g>
   </svg>
+
+const URLIcon = ({ faviconSource, url }) => {
+  const [favicon, setFavicon] = useState(null)
+  useEffect(() => {
+    let parsed
+    try { parsed = new URL(url) } catch (e) { }
+    if (parsed && /^http/.test(parsed.protocol)) {
+      const imagePreloader = new Image()
+      imagePreloader.onload = () => setFavicon(imagePreloader.src)
+      const load = (src) => imagePreloader.src = src
+      if (faviconSource === 'ddg')
+        load(`https://icons.duckduckgo.com/ip3/${parsed.host}.ico`)
+      else if (faviconSource === 'google')
+        load(`https://www.google.com/s2/favicons?domain=${parsed.host}&sz=32`)
+      else if (faviconSource === 'origin')
+        load(`${parsed.origin}/favicon.ico`)
+    }
+  }, [faviconSource, setFavicon, url])
+
+  if (favicon) {
+    return <img alt='Favicon' className='favicon' src={favicon} />
+  }
+  else {
+    // fallback if url is unparsable or favicon not loaded yet or inexistent
+    return <span>★</span>
+  }
+}
 
 const Name = ({ item }) =>
   <div className='item-name'>{item.name}</div>
@@ -267,7 +297,7 @@ const prototypeStyle = (selector, attr) =>
 
 Item.List = ({ items, ...itemProps }) =>
   <div className='item-list'>
-    {items.map((item) => <Item item={item} {...itemProps} />)}
+    {items && items.map((item) => <Item item={item} {...itemProps} />)}
   </div>
 
 Item.sort = (items) =>

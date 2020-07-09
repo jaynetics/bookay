@@ -12,4 +12,7 @@ export const AppContext = createContext({
 
   selectedIds: [],
   setSelectedIds: (_) => undefined,
+
+  user: null,
+  loadUser: () => undefined,
 })

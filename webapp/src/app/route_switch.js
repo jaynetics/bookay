@@ -5,7 +5,7 @@ import { Dashboard } from '../dashboard'
 import { EditItem, ItemHealth, NewItem, RecentItems, SearchResult } from '../items'
 import { NewImport } from '../imports/new'
 import { NewExport } from '../exports/new'
-import { NewUser, ShowUser } from '../users'
+import { EditUser, NewUser } from '../users'
 import { NewSession, DestroySession } from '../sessions'
 
 export const RouteSwitch = () =>
@@ -21,7 +21,7 @@ export const RouteSwitch = () =>
     <Route component={NewImport} path='/imports/create/:subview*' />
     <Route component={NewExport} path='/exports/create/:subview*' />
     <Route component={NewUser} path='/users/create' />
-    <Route component={ShowUser} path='/users/show' />
+    <Route component={EditUser} path='/settings' />
     <Route component={NewSession} path='/login' />
     <Route component={DestroySession} path='/logout' />
   </Switch>
