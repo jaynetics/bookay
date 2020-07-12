@@ -98,6 +98,7 @@ const createMozillaVersion = () => {
   content.browser_specific_settings = {
     gecko: {
       id: 'janosch84@gmail.com',
+      strict_min_version: '68.0',
     },
   }
   fs.writeFileSync(manifestPath, JSON.stringify(content, null, 2))
