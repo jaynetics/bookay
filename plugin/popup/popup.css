@@ -47,7 +47,7 @@ a:visited {
 .divider {
   color: #2c8898;
   font-size: 0.8em;
-  padding: 12px 0 0 50px;
+  padding: 12px 0 0 46px;
 }
 
 .action:hover,
@@ -58,7 +58,7 @@ a:visited {
 
 .icon {
   display: inline-block;
-  padding: 4px 0 0 20px;
+  padding: 4px 0 0 16px;
   vertical-align: top;
   width: 26px;
 }

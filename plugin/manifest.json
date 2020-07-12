@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "bookay",
   "short_name": "bookay",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "bookay browser plugin",
   "homepage_url": "https://github.com/jaynetics/bookay",
   "background": {
