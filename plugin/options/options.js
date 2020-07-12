@@ -6,10 +6,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const submitButton = form.querySelector('button')
 
   const renderFormField = ({ defaultValue, title, ...inputAttributes }) => {
-    const el = Object.assign(document.createElement('div'), { className: 'field' })
-    el.innerHTML = `<label><div class="label-text">${title}</div></label>`
-    const input = Object.assign(document.createElement('input'), inputAttributes)
-    el.querySelector('label').append(input)
+    const mk = (tag, attrs) => Object.assign(document.createElement(tag), attrs)
+    const el = mk('div', { className: 'field' })
+    const label = mk('label')
+    const text = mk('div', { className: 'label-text', textContent: title })
+    label.append(text)
+    const input = mk('input', inputAttributes)
+    label.append(input)
+    el.append(label)
     form.insertBefore(el, submitButton)
   }
 
@@ -21,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     ), {})
 
   const showMessage = (string) =>
-    document.getElementById('message').innerHTML = string
+    document.getElementById('message').textContent = string
 
   const saveValues = (event) => {
     event.preventDefault()
