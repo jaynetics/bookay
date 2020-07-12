@@ -136,6 +136,12 @@ class Popup {
     background.updateBadge({ url: this.siteURL, badgeState })
   }
 
-  close = () =>
+  close = () => {
     window.close()
+
+    // Closing does not work in Firefox for Android, so just refresh.
+    // Using the extension API as suggested here doesn't work in Fennec either:
+    // https://discourse.mozilla.org/t/how-to-close-popup-browser-window/13977
+    setTimeout(() => window.closed || this.checkCurrentURL(), 200)
+  }
 }
