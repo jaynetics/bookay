@@ -1,9 +1,5 @@
-/*
- * cut-down versions of sakura.css and sakura-dark.css v1.2.0
- * Project: https://github.com/oxalorg/sakura/
- */
+/*! cut-down versions of sakura.css and sakura-dark.css v1.2.0 | MIT License | https://github.com/oxalorg/sakura/ */
 
-/* Body */
 html {
   font-size: 62.5%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; }
@@ -21,7 +17,7 @@ body {
   body {
     font-size: 1.53rem; } }
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
   line-height: 1.1;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   font-weight: 700;
@@ -43,10 +39,7 @@ h2 {
 h3 {
   font-size: 1.75em; }
 
-h4 {
-  font-size: 1.5em; }
-
-small, sub, sup {
+small {
   font-size: 75%; }
 
 hr {
@@ -110,7 +103,7 @@ textarea, select, input[type] {
 input[type="checkbox"]:focus {
   outline: 1px dotted #2c8898; }
 
-label, legend, fieldset {
+label, fieldset {
   display: block;
   margin-bottom: .5rem;
   font-weight: 600; }
@@ -122,14 +115,10 @@ label, legend, fieldset {
     color: #c9c9c9;
     background-color: #222222; }
 
-  small, sub, sup {
-    font-size: 75%; }
-
   hr {
     border-color: #ffffff; }
 
   a {
-    text-decoration: none;
     color: #ffffff; }
     a:hover {
       color: #c9c9c9;
@@ -145,22 +134,17 @@ label, legend, fieldset {
     background-color: #ffffff;
     color: #222222;
     border: 1px solid #ffffff;  }
-    .button[disabled], button[disabled], input[type="submit"][disabled], input[type="reset"][disabled], input[type="button"][disabled] {
-      cursor: default;
-      opacity: .5; }
     .button:focus, .button:hover, button:focus, button:hover, input[type="submit"]:focus, input[type="submit"]:hover, input[type="reset"]:focus, input[type="reset"]:hover, input[type="button"]:focus, input[type="button"]:hover {
       background-color: #c9c9c9;
       border-color: #c9c9c9;
-      color: #222222;
-      outline: 0; }
+      color: #222222; }
 
   textarea, select, input[type] {
     color: #c9c9c9;
     background-color: #4a4a4a;
     border: 1px solid #4a4a4a;  }
     textarea:focus, select:focus, input[type]:focus {
-      border: 1px solid #ffffff;
-      outline: 0; }
+      border: 1px solid #ffffff; }
 
   input[type="checkbox"]:focus {
     outline: 1px dotted #ffffff; }

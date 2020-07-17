@@ -1,4 +1,4 @@
-/* sakura overrides */
+/*! sakura overrides */
 
 html > body {
   max-width: unset;
@@ -22,8 +22,7 @@ a.brand:hover {
   border-bottom: 0;
 }
 
-/* nav and burger use a few styles from picnic.css */
-/* https://picnicss.com/ */
+/*! nav and burger use a few styles from https://picnicss.com/ | MIT License */
 
 nav {
   align-items: center;
@@ -120,7 +119,9 @@ nav .search-icon {
   z-index: 2;
 }
 
-/* content. colors are based on sakura.css */
+/*! content */
+
+/* colors are based on sakura.css */
 
 #root {
   display: flex;
@@ -321,7 +322,7 @@ section h2, h3 {
 }
 
 .row {
-  align-content: start;
+  align-content: flex-start;
   display: flex;
   flex-wrap: wrap;
   width: 100%;

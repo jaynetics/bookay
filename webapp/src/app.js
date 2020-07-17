@@ -5,6 +5,10 @@ import { AppContext, GlobalFlashMessage, Nav, RouteSwitch } from './app/index'
 import { HashRouter } from './lib'
 import { client } from './shared'
 
+import './css/normalize.css'
+import './css/sakura.css'
+import './css/custom.css'
+
 const App = () => {
   const [changesById, setChangesById] = useState({})
   const [idsToCut, setIdsToCut] = useState([])
