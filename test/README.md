@@ -1,6 +1,6 @@
 # @bookay/test
 
-These are integration tests for bookay components
+These are integration tests for bookay components.
 
 ## Development
 
