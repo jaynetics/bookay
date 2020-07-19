@@ -19,6 +19,22 @@ context('Item drag and drop', () => {
     cy.shouldHaveItem('URL 1')
   })
 
+  it('allows moving items to root', () => {
+    cy.createItem({
+      type: 'folder', name: 'Folder 1', children: [
+        { type: 'folder', name: 'Folder 2' }
+      ]
+    })
+
+    cy.visit('/')
+    cy.shouldNotHaveItem('Folder 2', { within: 'folder' })
+
+    cy.item('Folder 1').dblclick()
+    cy.item('Folder 2').drag('.folder-tree')
+    cy.visit('/')
+    cy.shouldHaveItem('Folder 2', { within: 'folder' })
+  })
+
   it('allows moving multiple selected items', () => {
     cy.createItem({ type: 'folder', name: 'Folder 1' })
     cy.createItem({ type: 'url', name: 'URL 1', url: 'http://example.com' })

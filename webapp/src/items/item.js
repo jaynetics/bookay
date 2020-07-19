@@ -234,7 +234,6 @@ const ItemMenuButton = ({ active, setMenuCoords }) => {
   </span>
 }
 
-// TODO: add drop zone to support moving stuff to root
 const dragAndDropBehavior = ({ item, selectedIds }) => {
   if (item.type === 'url') return draggableBehavior({ item, selectedIds })
   else if (item.type === 'folder') return {
@@ -290,12 +289,14 @@ const buildDragPreview = ({ text }) => {
   return view
 }
 
-const dropTargetBehavior = ({ item }) => ({
+export const dropTargetBehavior = ({ item }) => ({
   onDragEnter: (e) => e.dataTransfer.dropEffect = 'copy',
   onDragLeave: (e) => e.dataTransfer.dropEffect = 'none',
   onDragOver: (e) => e.preventDefault(), // needed. this WHATWG spec is weird.
   onDrop: (e) => {
     e.preventDefault() // prevents click event on drag start point in Firefox
+    e.stopPropagation() // prevent duplicate dialog when dropping in tree
+
     const ids = JSON.parse(e.dataTransfer.getData('application/json'))
     if (ids && !ids.includes(item.id) && window.confirm(
       `Move ${count('item', ids.length)} into "${item.name}"?`
