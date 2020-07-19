@@ -1,6 +1,7 @@
 export * from './class_names'
 export * from './context_menu'
 export * from './copy_to_clipboard'
+export * from './count'
 export * from './debounce'
 export * from './event_test_helper'
 export * from './flash_message'

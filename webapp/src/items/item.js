@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState, useContext, useEffect } from 'preact/hooks'
-import { ContextMenu, EventTestHelper, classNames, route, truncate } from '../lib'
+import { ContextMenu, EventTestHelper, classNames, count, route, truncate } from '../lib'
 import { AppContext } from '../app/index'
 import { ItemContextMenu } from './context_menu'
 import { move, openURL, toggleSelect } from './actions'
@@ -284,13 +284,17 @@ const buildDragPreview = ({ text }) => {
   return view
 }
 
-const dropTargetBehavior = ({ item: { id } }) => ({
+const dropTargetBehavior = ({ item }) => ({
   onDragEnter: (e) => e.dataTransfer.dropEffect = 'copy',
   onDragLeave: (e) => e.dataTransfer.dropEffect = 'none',
   onDragOver: (e) => e.preventDefault(), // needed. this WHATWG spec is weird.
   onDrop: (e) => {
     const ids = JSON.parse(e.dataTransfer.getData('application/json'))
-    if (ids && !ids.includes(id)) move({ ids, intoFolderId: id })
+    if (ids && !ids.includes(item.id) && window.confirm(
+      `Move ${count('item', ids.length)} into "${item.name}"?`
+    )) {
+      move({ ids, intoFolderId: item.id })
+    }
   }
 })
 

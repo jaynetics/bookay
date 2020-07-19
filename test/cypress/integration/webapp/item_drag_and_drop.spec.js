@@ -7,8 +7,13 @@ context('Item drag and drop', () => {
 
     cy.visit('/')
 
+    // test dialog rejection, should not move
+    cy.once('window:confirm', () => false)
     cy.item('URL 1').drag('.item') // works as folder happens to be first .item
+    cy.shouldHaveItem('URL 1') // not yet moved due to dialog rejection
 
+    // try again
+    cy.item('URL 1').drag('.item')
     cy.shouldNotHaveItem('URL 1')
     cy.item('Folder 1').dblclick()
     cy.shouldHaveItem('URL 1')

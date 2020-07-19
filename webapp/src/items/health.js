@@ -1,5 +1,6 @@
 /** @jsx h */
 import { Component, h } from 'preact'
+import { count } from '../lib'
 import { client, useAPI, Loader } from '../shared'
 import { Item } from './item'
 import { useState } from 'preact/hooks'
@@ -15,8 +16,8 @@ export const ItemHealth = () => {
   return <section className='row'>
     <div>
       <h3>Stats</h3>
-      {Object.entries(typeCounts).map(([type, count]) =>
-        <p>{pluralize(Item.typeName(type), count)}</p>)}
+      {Object.entries(typeCounts).map(([type, cnt]) =>
+        <p>{count(Item.typeName(type), cnt)}</p>)}
     </div>
     <div>
       <h3>Duplicates</h3>
@@ -70,7 +71,7 @@ class BrokenBookmarksStream extends Component {
       return <None />
     }
     else {
-      return <p>{pluralize('link', broken.length)}</p>
+      return <p>{count('link', broken.length)}</p>
     }
   }
 
@@ -84,9 +85,6 @@ class BrokenBookmarksStream extends Component {
 
 const None = () =>
   <p>None! <span role='img' aria-label='Party'>🎉</span></p>
-
-const pluralize = (name, count) =>
-  `${count} ${name}${count === 1 ? '' : 's'}`
 
 const ERROR_MESSAGES = Object.entries({
   '400': 'Bad Request',
