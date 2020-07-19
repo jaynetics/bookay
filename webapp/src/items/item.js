@@ -268,16 +268,23 @@ const draggableBehavior = ({ item, selectedIds }) => ({
 })
 
 const buildDragPreview = ({ text }) => {
+  // render at 2x res to avoid blur
+  const width = 360
+  const height = parseInt(prototypeStyle('.item', 'height')) * 2
+
   const view = document.createElement('canvas')
   view.id = 'dragview'
-  view.height = parseInt(prototypeStyle('.item', 'height'))
-  view.width = 180
+  view.height = height
+  view.width = width
+  view.style.height = `${height / 2}px`
+  view.style.width = `${width / 2}px`
+
   const ctx = view.getContext('2d')
   ctx.fillStyle = prototypeStyle('body', 'background-color')
-  ctx.fillRect(0, 0, view.width, view.height)
+  ctx.fillRect(0, 0, width, height)
   ctx.fillStyle = prototypeStyle('.item-name', 'color')
-  ctx.font = prototypeStyle('.item-name', 'font')
-  ctx.fillText(text, 10, view.height / 1.5, view.width - 20)
+  ctx.font = `${height / 2}px ${prototypeStyle('.item-name', 'font-family')}`
+  ctx.fillText(text, 10, height / 1.5, width - 20)
   document.querySelectorAll(`#${view.id}`).forEach((e) => e.remove())
   document.body.append(view)
 
