@@ -6,12 +6,9 @@ export const useForm = ({ ...initialValues } = {}) => {
   const [error, setError] = useState(null)
   const [submitting, setSubmitting] = useState(false)
   const [values, setValues] = useState(initialValues)
-  const onChange = (e) => setValues({
-    ...values,
-    [e.target.name]: e.target.value || e.target.checked,
-  })
+  const setValue = (name, value) => setValues({ ...values, [name]: value })
 
-  return { error, setError, onChange, submitting, setSubmitting, values, setValues }
+  return { error, setError, submitting, setSubmitting, values, setValue }
 }
 
 export const Form = ({
@@ -24,7 +21,7 @@ export const Form = ({
   setSubmitting = null,
   submitText = 'Save',
   submitting,
-  values
+  values,
 }) =>
   <form onSubmit={(e) => {
     e.preventDefault()
@@ -47,23 +44,39 @@ export const Form = ({
     {error && <small style={{ color: '#d00', paddingLeft: 12 }}>{error}</small>}
   </form>
 
-Form.Input = ({ name, label, type = 'text', values = null, onChange = null }) =>
+Form.Input = ({ label, name, type = 'text', values = null, setValue }) =>
   <Fragment>
     <label for={name}>{label}</label>
-    <input name={name} type={type} value={values[name] || ''} onKeyUp={onChange} style={{ width: '100%' }} />
+    <input
+      name={name}
+      onKeyUp={(e) => setValue(name, e.target.value)}
+      style={{ width: '100%' }}
+      type={type}
+      value={values[name] || ''}
+    />
   </Fragment>
 
-Form.RadioButton = ({ name, label, value, values = null, onChange = null }) =>
+Form.RadioButton = ({ label, name, value, values = null, setValue }) =>
   <label>
-    <input type='radio' name={name} checked={values[name] === value} value={value}
-      onChange={e => e.target.checked && onChange(e)} />
+    <input
+      checked={values[name] === value}
+      name={name}
+      onChange={(e) => e.target.checked && setValue(name, value)}
+      type='radio'
+      value={value}
+    />
     <span>{' '}{label}</span>
   </label>
 
-Form.Select = ({ name, label, options, values = null, onChange = null }) =>
+Form.Select = ({ label, name, options, values = null, setValue }) =>
   <Fragment>
     {label && <label for={`${name}-select`}>{label}</label>}
-    <select id={`${name}-select`} name={name} onChange={onChange} value={values[name]}>
+    <select
+      id={`${name}-select`}
+      name={name}
+      onChange={(e) => setValue(name, e.target.value || null)}
+      value={values[name]}
+    >
       {options.map(([name, value]) => <option value={value}>{name}</option>)}
     </select>
   </Fragment>

@@ -234,6 +234,8 @@ const ItemMenuButton = ({ active, setMenuCoords }) => {
   </span>
 }
 
+// TODO: fix that folder is opened after DnD (only in Firefox)
+// TODO: add drop zone to support moving stuff to root
 const dragAndDropBehavior = ({ item, selectedIds }) => {
   if (item.type === 'url') return draggableBehavior({ item, selectedIds })
   else if (item.type === 'folder') return {

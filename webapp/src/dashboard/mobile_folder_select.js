@@ -7,7 +7,7 @@ export const MobileFolderSelect = ({ activeId }) =>
   <FolderSelect
     name='activeId'
     rootLabel={activeId ? 'Back to root' : 'Quickly jump to a folder'}
-    onChange={({ target: { value: id } }) => route(id ? `/folders/${id}` : '/')}
+    setValue={(_, id) => route(id ? `/folders/${id}` : '/')}
     showBrowser={false}
     values={{ activeId }}
   />

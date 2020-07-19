@@ -14,7 +14,8 @@ export const FolderSelect = ({
   showBrowser = true,
   ...form
 }) => {
-  const defaultOption = [rootLabel, '']
+  const defaultOption = [rootLabel, null]
+
   const { data } = useAPI(client.getAllFolders())
   const validFolders = useMemo(() => {
     if (!data) return []
@@ -37,7 +38,7 @@ export const FolderSelect = ({
     </div>}
     <FolderBrowserModal
       folders={validFolders}
-      onSelect={(folderId) => form.setValues({ ...form.values, folderId })}
+      onSelect={(folderId) => form.setValue('folderId', folderId)}
     />
   </div>
 }
