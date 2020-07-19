@@ -234,7 +234,6 @@ const ItemMenuButton = ({ active, setMenuCoords }) => {
   </span>
 }
 
-// TODO: fix that folder is opened after DnD (only in Firefox)
 // TODO: add drop zone to support moving stuff to root
 const dragAndDropBehavior = ({ item, selectedIds }) => {
   if (item.type === 'url') return draggableBehavior({ item, selectedIds })
@@ -296,6 +295,7 @@ const dropTargetBehavior = ({ item }) => ({
   onDragLeave: (e) => e.dataTransfer.dropEffect = 'none',
   onDragOver: (e) => e.preventDefault(), // needed. this WHATWG spec is weird.
   onDrop: (e) => {
+    e.preventDefault() // prevents click event on drag start point in Firefox
     const ids = JSON.parse(e.dataTransfer.getData('application/json'))
     if (ids && !ids.includes(item.id) && window.confirm(
       `Move ${count('item', ids.length)} into "${item.name}"?`
