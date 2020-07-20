@@ -33,7 +33,7 @@ context('Editing items', () => {
   it('allows choosing a new folder by browsing', () => {
     cy.createItem({ type: 'folder', name: 'Folder 1' }).then(response => {
       cy.createItem({ type: 'folder', name: 'Folder 2' })
-      cy.visit(`/#/items/${response.body.id}`)
+      cy.visit(`/#/items/${response.body.id}`).wait(100)
       cy.get('[name=folderId] :selected').should('have.text', 'none (root)')
 
       cy.contains('Browse folders').click()
