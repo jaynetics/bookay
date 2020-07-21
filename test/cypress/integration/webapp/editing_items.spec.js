@@ -12,7 +12,8 @@ context('Editing items', () => {
       // verify that folder can be changed
       cy.createItem({ type: 'folder', name: 'Folder 2' })
       cy.visit(`/#/items/${response.body.id}`)
-      cy.get('[name=folderId]').select('Folder 2').wait(100)
+      cy.get('[name=folderId]').select('Folder 2')
+      cy.wait(100) // wait for folder select to re-render
       cy.get('[name=folderId] :selected').should('have.text', 'Folder 2')
       cy.get('form').submit()
 
@@ -21,7 +22,8 @@ context('Editing items', () => {
 
       // verify that root folder (folderId === null) can be set
       cy.visit(`/#/items/${response.body.id}`)
-      cy.get('[name=folderId]').select('none (root)').wait(100)
+      cy.get('[name=folderId]').select('none (root)')
+      cy.wait(100) // wait for folder select to re-render
       cy.get('[name=folderId] :selected').should('have.text', 'none (root)')
       cy.get('form').submit()
 
@@ -33,12 +35,14 @@ context('Editing items', () => {
   it('allows choosing a new folder by browsing', () => {
     cy.createItem({ type: 'folder', name: 'Folder 1' }).then(response => {
       cy.createItem({ type: 'folder', name: 'Folder 2' })
-      cy.visit(`/#/items/${response.body.id}`).wait(100)
+      cy.visit(`/#/items/${response.body.id}`)
+      cy.wait(100) // wait for folder select to load
       cy.get('[name=folderId] :selected').should('have.text', 'none (root)')
 
       cy.contains('Browse folders').click()
       cy.item('Folder 2').click()
-      cy.contains('Choose this folder').click().wait(100)
+      cy.contains('Choose this folder').click()
+      cy.wait(100) // wait for folder select to re-render
       cy.get('[name=folderId] :selected').should('have.text', 'Folder 2')
       cy.get('form').submit()
 

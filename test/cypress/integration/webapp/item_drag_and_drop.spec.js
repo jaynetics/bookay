@@ -31,6 +31,7 @@ context('Item drag and drop', () => {
 
     cy.item('Folder 1').dblclick()
     cy.item('Folder 2').drag('.folder-tree')
+    cy.wait(100) // wait for API call to complete
     cy.visit('/')
     cy.shouldHaveItem('Folder 2', { within: 'folder' })
   })

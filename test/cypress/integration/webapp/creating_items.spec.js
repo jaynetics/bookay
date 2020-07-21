@@ -52,7 +52,8 @@ context('Creating items', () => {
 
     cy.contains('Folder').click()
     cy.get('[name=name]').type('Nested folder')
-    cy.get('[name=folderId]').select('Folder 1').wait(100)
+    cy.get('[name=folderId]').select('Folder 1')
+    cy.wait(100) // wait for value to be set
     cy.get('form').submit()
 
     cy.visit('/')
@@ -73,7 +74,8 @@ context('Creating items', () => {
     cy.contains('Browse folders').click()
     cy.item('Folder 1').click()
     cy.item('Folder 2').click()
-    cy.contains('Choose this folder').click().wait(100)
+    cy.contains('Choose this folder').click()
+    cy.wait(100) // wait for folder select to re-render
     cy.get('[name=folderId] :selected').should('have.text', 'Folder 2')
   })
 

@@ -61,6 +61,10 @@ export const initFetchMocks = (fm, client) => {
     client.checkURL({ urlToCheck: 'ping', historySize: 0, suggestSize: 0 }),
     { status: 200, body: {} }
   )
+  fm.get(
+    client.userURL(),
+    { status: 200, body: { settings: {} } }
+  )
 }
 
 const fixtures = [

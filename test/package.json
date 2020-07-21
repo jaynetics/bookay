@@ -16,9 +16,9 @@
   "license": "MIT",
   "dependencies": {
     "@4tw/cypress-drag-drop": "^1.3.1",
-    "cypress": "^4.8.0",
+    "cypress": "^4.10.0",
     "cypress-file-upload": "^4.0.7",
-    "cypress-localstorage-commands": "^1.2.0",
-    "start-server-and-test": "^1.11.0"
+    "cypress-localstorage-commands": "^1.2.1",
+    "start-server-and-test": "^1.11.2"
   }
 }
