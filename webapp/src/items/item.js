@@ -1,7 +1,8 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState, useContext, useEffect } from 'preact/hooks'
-import { ContextMenu, EventTestHelper, classNames, count, route, truncate } from '../lib'
+import classNames from 'classnames'
+import { ContextMenu, EventTestHelper, count, route, truncate } from '../lib'
 import { AppContext } from '../app/index'
 import { ItemContextMenu } from './context_menu'
 import { move, openURL, toggleSelect } from './actions'

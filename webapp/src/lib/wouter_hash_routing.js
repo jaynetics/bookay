@@ -2,6 +2,7 @@
 import { h } from 'preact'
 import { useEffect, useCallback, useState } from 'preact/hooks'
 import { Link as WouterLink, Router, useRoute } from 'wouter-preact'
+import classNames from 'classnames'
 
 export const HashRouter = ({ children }) =>
   <Router children={children} hook={useHashLocation} />
@@ -43,11 +44,10 @@ export const route = (to) => {
 
 export const Link = ({ className = null, children, to }) => {
   const [active] = useRoute(to)
-  const classNames = [active && 'active', className].filter(e => e)
 
   return <WouterLink href={`#${to}`}>
     {/* linter doesn't understand that wouter injects an href attribute */}
     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-    <a className={classNames.join(' ')}>{children}</a>
+    <a className={classNames(className, { active })}>{children}</a>
   </WouterLink >
 }

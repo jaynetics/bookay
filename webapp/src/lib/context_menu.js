@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
+import classNames from 'classnames'
 
 export const ContextMenu = ({
   className = 'context-menu',
@@ -38,7 +39,7 @@ export const ContextMenu = ({
   else menuStyle.bottom = window.innerHeight - y
 
   return <div
-    className={[className, CLASS_NAME].filter(e => e).join(' ')}
+    className={classNames(className, CLASS_NAME)}
     style={menuStyle}
   >
     {children}

@@ -2,7 +2,8 @@
 import { Fragment, createRef, h } from 'preact'
 import { useEffect, useState, useContext } from 'preact/hooks'
 import { useRoute } from 'wouter-preact'
-import { Link, classNames, flash, route, useDebouncedCallback } from '../lib'
+import classNames from 'classnames'
+import { Link, flash, route, useDebouncedCallback } from '../lib'
 import { AppContext } from './app_context'
 
 export const Nav = () => {
