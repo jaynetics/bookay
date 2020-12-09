@@ -20,22 +20,22 @@ jobs:
 
     - name: Build and test server
       run: |
-        npm run install --prefix server
+        npm ci --prefix server
         npm run build --prefix server
         npm run test --prefix server
 
     - name: Build and test webapp
       run: |
-        npm run install --prefix webapp
+        npm ci --prefix webapp
         npm run build --prefix webapp
         npm run test --prefix webapp
 
     - name: Build plugin
       run: |
-        npm run install --prefix plugin
+        npm ci --prefix plugin
         npm run build --prefix plugin
 
     - name: Run integration tests
       run: |
-        npm run install --prefix test
+        npm ci --prefix test
         npm run test --prefix test
