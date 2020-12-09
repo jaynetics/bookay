@@ -4,11 +4,11 @@
   "description": "integration tests for bookay components",
   "main": "index.js",
   "scripts": {
-    "pretest": "npm --prefix .. run build",
+    "rebuild": "npm --prefix .. run build",
     "start": "start-server-and-test start_server http://localhost:3033 test:open",
     "start_server": "npm --prefix ../server run start:integration",
     "test": "start-server-and-test start_server http://localhost:3033 test:run",
-    "test:open": "npm run pretest && cypress open",
+    "test:open": "cypress open",
     "test:run": "cypress run"
   },
   "repository": "https://github.com/jaynetics/bookay",

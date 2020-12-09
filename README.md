@@ -1,5 +1,7 @@
 # bookay
 
+[![Build Status](https://github.com/jaynetics/bookay/workflows/tests/badge.svg)](https://github.com/jaynetics/bookay/actions)
+
 bookay is a set of free, open-source tools for self-hosting your bookmarks.
 
 ## Why?
