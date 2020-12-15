@@ -6,9 +6,12 @@ This is a browser extension that lets you bookmark sites as you browse.
 
 Install it from your browser's extension store:
 
-- [bookay in the Chrome Web Store](https://chrome.google.com/webstore/detail/bookay/pfickfheilmaneonfehmocbebkdnlhjm)
-- [bookay in Firefox Add-Ons](https://addons.mozilla.org/addon/bookay/)
+- [bookay in the Chrome Web Store](https://chrome.google.com/webstore/detail/bookay/pfickfheilmaneonfehmocbebkdnlhjm)\*
+- [bookay in Firefox Add-Ons](https://addons.mozilla.org/addon/bookay/)\*\*
 
+**\*** Also works for other Chromium-based browsers.
+
+**\*\*** The Firefox addon is straightforward to use on desktop, but sadly very cumbersome on recent versions of Firefox for Android. [This is the official workaround](https://blog.mozilla.org/addons/2020/09/29/expanded-extension-support-in-firefox-for-android-nightly/).
 ### Keyboard navigation
 
 Toggle the plugin with `Ctrl/Cmd+Shift+E` (customizable), then
