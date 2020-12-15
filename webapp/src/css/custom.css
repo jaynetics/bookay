@@ -192,6 +192,14 @@ section h2, h3 {
   width: 100%;
 }
 
+/* fix firefox ignorance of bottom padding in scroll containers,
+   c.f. https://stackoverflow.com/questions/29986977 */
+@supports (-moz-appearance:none) {
+  .scroll-section > :last-child {
+    padding-bottom: 2em;
+  }
+}
+
 .scroll-section::after { /* adds bottom shadow */
   bottom: -22px;
   box-shadow: 0 0 12px 22px #f9f9f9aa;
