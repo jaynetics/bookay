@@ -7,6 +7,7 @@ export class Configuration {
     { id: 'suggestRoot', type: 'checkbox', title: 'Show "Add to root" suggestion', defaultValue: true },
     { id: 'historySize', type: 'number', title: 'How many recent bookmarks to show', required: true, defaultValue: 3, min: 0, max: 20 },
     { id: 'timeoutSeconds', type: 'number', title: 'Timeout in seconds', required: true, defaultValue: 20 },
+    { id: 'checkOnVisit', type: 'checkbox', title: 'Check if a site is bookmarked when visiting', defaultValue: false },
     { id: 'keepAliveMinutes', type: 'number', title: 'Keep service alive by pinging every N minutes (0 to disable)', required: true, defaultValue: 0, min: 0 },
   ]
 
