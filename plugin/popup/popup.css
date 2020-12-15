@@ -99,7 +99,7 @@ form button {
 /* mobile / responsive layout */
 
 @media (min-device-width: 684px) {
-  .text::first-letter {
+  .with-keyboard-hints .text::first-letter {
     text-decoration: underline;
   }
 }

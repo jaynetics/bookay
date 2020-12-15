@@ -1,10 +1,12 @@
 export default class Menu {
   static items = []
 
-  static addItem = ({ icon, text, func }) => {
+  static addItem = ({ icon, text, func, keyboardNav = false }) => {
     const html = `
       <div class="icon">${icon}</div>
-      <div class="text">${text.replace(/[<>]/g, '')}</div>
+      <div class="text${keyboardNav ? ' with-keyboard-nav' : ''}">
+        ${text.replace(/[<>]/g, '')}
+      </div>
     `
     Menu.append(new MenuItem({ html, text, func }))
   }
@@ -43,8 +45,12 @@ export default class Menu {
     })
   }
 
-  static setupHotkeys = () =>
+  static setupHotkeys = ({ withHints }) => {
+    if (withHints) {
+      document.body.classList.add('with-keyboard-hints')
+    }
     (new MenuHotkeyListener()).listen()
+  }
 
   static get actionItems() {
     return this.items.filter((item) => !!item.func)

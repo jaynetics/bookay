@@ -16,7 +16,7 @@ class Popup {
       ...this.config, onAuthRequired: () => Menu.showLogin(this.client)
     })
     this.checkCurrentURL()
-    Menu.setupHotkeys()
+    Menu.setupHotkeys({ withHints: this.config.showKeyboardHints })
   }
 
   validateServiceURLSet = () => {
@@ -92,7 +92,7 @@ class Popup {
     suggestedFolders.forEach(({ name, id: folderId }, i) =>
       Menu.addItem({
         icon: '✩',
-        text: `${i + 1} ${name}`,
+        text: this.config.showKeyboardHints ? `${i + 1} ${name}` : `${name}`,
         func: () => {
           Menu.showLoader()
           this.client.create({ type: 'url', url: this.siteURL, name: this.siteName, folderId })
