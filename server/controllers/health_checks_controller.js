@@ -21,7 +21,7 @@ const show = async (req, res) => {
   res.end()
 }
 
-const TIMEOUT_MS = 2000
+const TIMEOUT_MS = process.env.NODE_ENV === 'test' ? 5000 : 2000
 
 const getUrlStatus = async (url, userAgent) => {
   // ignore non-web urls
