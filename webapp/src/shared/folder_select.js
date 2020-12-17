@@ -1,8 +1,8 @@
 /** @jsx h */
 import { h } from 'preact'
-import { useMemo } from 'preact/hooks'
+import { useMemo, useState } from 'preact/hooks'
 import { useRoute } from 'wouter-preact'
-import { Form, Link, currentLocation, route, truncate } from '../lib'
+import { Form, Link, currentLocation, route, truncate, useDidUpdateRoute } from '../lib'
 import { client, useAPI } from './client'
 import { Item } from '../items'
 
@@ -45,6 +45,7 @@ export const FolderSelect = ({
 
 export const FolderBrowserModal = ({ folders, onSelect }) => {
   const [active, params] = useRoute('/:baseRoute+/in-folder/:folderId?')
+  const [addFolder, setAddFolder] = useState(false)
   if (!active || !folders) return null
 
   const folderId = parseInt(params.folderId) || null
@@ -61,14 +62,55 @@ export const FolderBrowserModal = ({ folders, onSelect }) => {
       onSelect(folderId)
       exit()
     }}>
-      Choose this folder
+      Choose
+    </button>
+    {' '}
+    <button type='button' onClick={() => setAddFolder(!addFolder)}>
+      New folder
     </button>
     {' '}
     <button type='button' onClick={exit}>Cancel</button>
+
+    {addFolder && <InlineNewFolderForm
+      close={() => setAddFolder(false)}
+      folderId={folderId}
+    />}
 
     <Item.List items={Item.sort(subfolders)} onClick={(_event, item) => {
       route(`/${params.baseRoute}/in-folder/${item.id}`)
       return true
     }} />
   </section>
+}
+
+// This can't be an actual form tag as it needs to be nestable in other forms.
+// An alternative would be to use a modal/portal lib to render this stuff.
+const InlineNewFolderForm = ({ close, folderId }) => {
+  const [name, setName] = useState('')
+
+  // self-hide on any routing action
+  useDidUpdateRoute(close)
+
+  return <div>
+    <input
+      form='none' // avoids submitting outer form on enter keypress
+      name='name'
+      onKeyUp={(e) => setName(e.target.value)}
+      type='text'
+      value={name}
+    />
+    {' '}
+    <button
+      disabled={!name}
+      onClick={
+        () =>
+          client.create({ folderId, name, type: 'folder' })
+            .then(() => setTimeout(() => window.location.reload(), 50))
+            .catch(console.error)
+      }
+      type='button'
+    >
+      Add
+    </button>
+  </div>
 }

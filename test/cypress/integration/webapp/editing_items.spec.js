@@ -41,7 +41,7 @@ context('Editing items', () => {
 
       cy.contains('Browse folders').click()
       cy.item('Folder 2').click()
-      cy.contains('Choose this folder').click()
+      cy.contains('Choose').click()
       cy.wait(100) // wait for folder select to re-render
       cy.get('[name=folderId] :selected').should('have.text', 'Folder 2')
       cy.get('form').submit()

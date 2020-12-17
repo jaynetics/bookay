@@ -74,9 +74,34 @@ context('Creating items', () => {
     cy.contains('Browse folders').click()
     cy.item('Folder 1').click()
     cy.item('Folder 2').click()
-    cy.contains('Choose this folder').click()
+    cy.contains('Choose').click()
     cy.wait(100) // wait for folder select to re-render
     cy.get('[name=folderId] :selected').should('have.text', 'Folder 2')
+  })
+
+  it('allows adding items to a folder created while browsing', () => {
+    cy.createItem({
+      type: 'folder', name: 'Folder 1', children: [
+        { type: 'folder', name: 'Folder 2' }
+      ]
+    })
+    cy.visit('/#/items/create')
+
+    cy.contains('Folder').click()
+    cy.get('[name=name]').type('Nested folder')
+    cy.contains('Browse folders').click()
+    cy.item('Folder 1').click()
+    cy.item('Folder 2').click()
+
+    // adding and choosing a new folder
+    cy.contains('New folder').click()
+    cy.get('.modal [name=name]').type('Folder 3')
+    cy.get('.modal').contains('Add').click()
+    cy.item('Folder 3').click()
+    cy.contains('Choose').click()
+
+    cy.wait(100) // wait for folder select to re-render
+    cy.get('[name=folderId] :selected').should('have.text', 'Folder 3')
   })
 
   it('supports URL params', () => {

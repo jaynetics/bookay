@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
-import { useEffect, useCallback, useState } from 'preact/hooks'
+import { useEffect, useCallback, useRef, useState } from 'preact/hooks'
 import { Link as WouterLink, Router, useRoute } from 'wouter-preact'
 import classNames from 'classnames'
 
@@ -50,4 +50,15 @@ export const Link = ({ className = null, children, to }) => {
     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
     <a className={classNames(className, { active })}>{children}</a>
   </WouterLink >
+}
+
+export const useDidUpdateRoute = (callback) => {
+  const matchedOnce = useRef(false)
+  const [match, params] = useRoute('/:fullRoute+')
+
+  useEffect(() => {
+    if (!match) return
+    else if (matchedOnce.current) callback()
+    else matchedOnce.current = true
+  }, [callback, match, params.fullRoute])
 }
