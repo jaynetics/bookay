@@ -3,12 +3,14 @@ export class ApiClient {
     historySize = 0,
     onAuthRequired = () => console.log('Auth required'),
     serviceURL,
+    sessionStore = LocalStorageSessionStore,
     suggestSize = 0,
     timeoutSeconds = null,
   }) {
     this.historySize = historySize
     this.onAuthRequired = onAuthRequired
-    this.serviceURL = serviceURL && serviceURL.replace(/[/ ]+$/, '')
+    this.serviceURL = serviceURL && serviceURL.replace(/[\/\s]+$/, '')
+    this.sessionStore = sessionStore
     this.suggestSize = suggestSize
     this.timeoutMs = (parseInt(timeoutSeconds) || 20) * 1000
   }
@@ -21,7 +23,7 @@ export class ApiClient {
     return new Promise((resolve, reject) => {
       this.fetch(this.loginURL(), { method: 'POST', body })
         .then(({ sessionId }) => {
-          this.sessionId = sessionId
+          this.sessionStore.setId(sessionId)
           resolve({ sessionId })
         })
         .catch(reject)
@@ -29,7 +31,7 @@ export class ApiClient {
   }
 
   logout() {
-    this.sessionId = ''
+    this.sessionStore.setId('')
     return this.fetch(this.logoutURL(), { method: 'DELETE' })
   }
 
@@ -248,20 +250,8 @@ export class ApiClient {
   get headers() {
     return new Headers({
       'content-type': 'application/json',
-      'x-session-id': this.sessionId,
+      'x-session-id': this.sessionStore.getId(),
     })
-  }
-
-  get sessionId() {
-    return localStorage.getItem(this.sessionIdKey)
-  }
-
-  set sessionId(value) {
-    localStorage.setItem(this.sessionIdKey, value)
-  }
-
-  get sessionIdKey() {
-    return 'bookay_session_id'
   }
 
   toQuery({ ...obj }) {
@@ -280,3 +270,10 @@ export class ApiClient {
     })
   }
 }
+
+const LocalStorageSessionStore = {
+  getId: () => localStorage.getItem(BOOKAY_SESSION_ID),
+  setId: (value) => localStorage.setItem(BOOKAY_SESSION_ID, value),
+}
+
+const BOOKAY_SESSION_ID = 'bookay_session_id'
