@@ -38,3 +38,10 @@ jobs:
       run: |
         npm ci --prefix test
         npm run test --prefix test
+
+    - name: Upload cypress screenshots
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: cypress-screenshots
+        path: test/cypress/screenshots/*
