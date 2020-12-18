@@ -3,7 +3,7 @@
 context('Creating items', () => {
   it('allows adding new URLs', () => {
     cy.visit('/')
-    cy.contains('+').click()
+    cy.contains('.nav-button', '+').click()
 
     // error case
     cy.get('form').submit()
