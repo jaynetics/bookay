@@ -4,7 +4,7 @@ context('Creating items', () => {
   it('allows adding new URLs', () => {
     cy.visit('/')
     cy.contains('+').click()
-    cy.wait(200) // cypress doesn't seem to see the click as navigating action
+    cy.wait(2000) // cypress doesn't seem to see the click as navigating action
 
     // error case
     cy.get('form').submit()
