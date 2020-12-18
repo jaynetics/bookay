@@ -29,35 +29,31 @@ context('Mobile view', () => {
 
     cy.shouldHaveItem('Folder 1')
     cy.shouldNotHaveItem('Inner folder')
-    cy.window().then(win => {
-      win.postMessage({ testEvent: 'touchstart', target: 'Folder 1' }, null)
-      win.postMessage({ testEvent: 'touchend', target: 'Folder 1' }, null)
-    })
+    // c.f. event_test_helper.js
+    cy.window().then(w => w.postMessage({ testEvent: 'touchstart', target: 'Folder 1' }, null))
     cy.item('Folder 1').click()
     cy.shouldHaveItem('Inner folder')
   })
 
-  // TODO:
-  // test this once cypress supports it
-  // c.f. https://github.com/cypress-io/cypress/issues/5504
-  xit('toggles item selection state on long press', () => {
+  // TODO: this test is a bit artificial, improve if this issue is ever solved:
+  // https://github.com/cypress-io/cypress/issues/5504
+  it('toggles item selection state on long press', () => {
     cy.createItem({ type: 'folder', name: 'Folder 1' })
 
     cy.visit('/')
 
     cy.item('Folder 1').should('not.have.class', 'selected')
 
-    // // first long press: select
-    // cy.item('Folder 1').trigger('touchstart')
-    // cy.wait(100)
-    // cy.item('Folder 1').trigger('contextmenu')
-    // cy.item('Folder 1').should('have.class', 'selected')
+    // first long press: select, c.f. event_test_helper.js
+    cy.window().then(w => w.postMessage({ testEvent: 'touchstart', target: 'Folder 1' }, null))
+    cy.item('Folder 1').trigger('contextmenu')
 
-    // // second long press: deselect
-    // cy.item('Folder 1').trigger('touchstart')
-    // cy.wait(100)
-    // cy.item('Folder 1').trigger('contextmenu')
+    cy.item('Folder 1').should('have.class', 'selected')
 
-    // cy.item('Folder 1').should('not.have.class', 'selected')
+    // second long press: deselect, c.f. event_test_helper.js
+    cy.window().then(w => w.postMessage({ testEvent: 'touchstart', target: 'Folder 1' }, null))
+    cy.item('Folder 1').trigger('contextmenu')
+
+    cy.item('Folder 1').should('not.have.class', 'selected')
   })
 })
