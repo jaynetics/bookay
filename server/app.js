@@ -1,5 +1,5 @@
 const express = require('express')
-const sslRedirect = require('heroku-ssl-redirect')
+const sslRedirect = require('heroku-ssl-redirect').default
 const router = require('./router')
 
 const app = express()

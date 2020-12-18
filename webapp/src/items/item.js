@@ -2,7 +2,7 @@
 import { h } from 'preact'
 import { useState, useContext, useEffect } from 'preact/hooks'
 import classNames from 'classnames'
-import { ContextMenu, EventTestHelper, count, route, truncate } from '../lib'
+import { ContextMenu, count, route, truncate } from '../lib'
 import { AppContext } from '../app/index'
 import { ItemContextMenu } from './context_menu'
 import { move, openURL, toggleSelect } from './actions'
@@ -87,8 +87,6 @@ const Body = ({
   showingMenu,
 }) => {
   const [touchEvent, setTouchEvent] = useState(false)
-  const markEventAsTouchEvent = () => setTouchEvent(true)
-
   const active = item.id === activeId || showingMenu
 
   const openItem = () => {
@@ -130,10 +128,9 @@ const Body = ({
       }
     }}
     onDblClick={onClick ? undefined : openItem}
-    onTouchStart={markEventAsTouchEvent}
+    onTouchStart={() => setTouchEvent(true)}
   >
     {children}
-    <EventTestHelper target={item.name} touchstart={markEventAsTouchEvent} />
   </a>
 }
 
