@@ -20,4 +20,7 @@ module.exports = (on, config) => {
   // `config` is the resolved Cypress config
 
   // on('before:browser:launch', require('./add_extension'))
+
+  // https://github.com/archfz/cypress-terminal-report
+  require('cypress-terminal-report/src/installLogsPrinter')(on)
 }
