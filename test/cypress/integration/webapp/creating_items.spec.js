@@ -1,14 +1,10 @@
 /// <reference path="../../support/index.d.ts" />
 
 context('Creating items', () => {
-  it('is accessible via the nav bar', () => {
+  it('allows adding new URLs', () => {
     cy.visit('/')
     cy.contains('+').click()
-    cy.url().should('contain', '/#/items/create')
-  })
-
-  it('allows adding new URLs', () => {
-    cy.visit('/#/items/create')
+    cy.wait(2000) // cypress doesn't seem to see the click as navigating action
 
     // error case
     cy.get('form').submit()
