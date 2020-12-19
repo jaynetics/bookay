@@ -6,7 +6,11 @@ This is a backend that stores your bookmarks in a database of your choice.
 
 Put it on a PAAS or any machine with Node and a database.
 
-### Example: deployment on Heroku
+### Example: deployment on the free tier of Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jaynetics/bookay)
+
+### Example: manual deployment on Heroku
 
 1. [create an app on Heroku](https://heroku.com) - the free tier should do\*
 2. add `Heroku Postgres` in the app's `Resources` / `Addons` section

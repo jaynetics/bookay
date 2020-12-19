@@ -1,0 +1,23 @@
+{
+  "name": "bookay",
+  "description": "A server for self-hosted bookmarks. Includes frontend. Browser plugin available.",
+  "keywords": [
+    "bookmarks",
+    "self-hosted"
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev"
+    }
+  ],
+  "logo": "https://github.com/jaynetics/bookay/blob/master/plugin/assets/icon-64.png",
+  "repository": "https://github.com/jaynetics/bookay",
+  "success_url": "/",
+  "website": "https://github.com/jaynetics/bookay"
+}
