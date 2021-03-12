@@ -12,9 +12,9 @@ bookay is a set of free, open-source tools for self-hosting your bookmarks.
 
 ## Features
 
-- easily deployed [backend](./server/README.md)
-- customizable, keyboard-friendly [browser plugin](./plugin/README.md)
-- lightweight (~50 kB) [web app](./webapp/README.md)
+- easily deployed [backend](./server/)
+- customizable, keyboard-friendly [browser plugin](./plugin/)
+- lightweight (~50 kB) [web app](./webapp/)
 - support for nested folders
 - data import and export
 - scan for dupes and broken links
