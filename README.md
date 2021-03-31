@@ -4,6 +4,12 @@
 
 bookay is a set of free, open-source tools for self-hosting your bookmarks.
 
+[
+  ![Screenshot thumbnail showing the webapp and browser plugin](
+    https://user-images.githubusercontent.com/10758879/113178657-1528d000-924f-11eb-9a02-2c0e4e504074.png
+  )
+](https://user-images.githubusercontent.com/10758879/113178042-77350580-924e-11eb-820f-298da2a2631d.png)
+
 ## Why?
 
 - a bookmarking service is useful if you use varying browsers or devices
