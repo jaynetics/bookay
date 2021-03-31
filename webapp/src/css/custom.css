@@ -31,8 +31,6 @@ nav {
   padding: 0 .6em;
   background-color: #fff;
   z-index: 10000;
-  transition: all .2s;
-  transform-style: preserve-3d;
 }
 .brand,
 .nav-button {
