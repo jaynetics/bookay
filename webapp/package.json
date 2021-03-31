@@ -1,6 +1,6 @@
 {
   "name": "@bookay/webapp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "web-app to browse and manage bookay bookmarks",
   "main": "src/index.js",
   "author": "Janosch Müller",
