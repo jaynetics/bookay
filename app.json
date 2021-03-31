@@ -16,7 +16,7 @@
       "plan": "heroku-postgresql:hobby-dev"
     }
   ],
-  "logo": "https://github.com/jaynetics/bookay/blob/master/plugin/assets/icon-64.png",
+  "logo": "https://github.com/jaynetics/bookay/blob/main/plugin/assets/icon-64.png",
   "repository": "https://github.com/jaynetics/bookay",
   "success_url": "/",
   "website": "https://github.com/jaynetics/bookay"

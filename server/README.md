@@ -20,7 +20,7 @@ Put it on a PAAS or any machine with Node and a database.
 ```sh
 heroku login
 curl -n -X POST 'https://api.heroku.com/apps/<APP_NAME>/builds' \
-  -d '{"source_blob":{"url":"https://github.com/jaynetics/bookay/archive/master.tar.gz"}}' \
+  -d '{"source_blob":{"url":"https://github.com/jaynetics/bookay/archive/main.tar.gz"}}' \
   -H 'Accept: application/vnd.heroku+json; version=3' \
   -H 'Content-Type: application/json'
 ```
