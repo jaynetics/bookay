@@ -24,7 +24,7 @@ export const Nav = () => {
     }}>+</div>
     <div className='nav-button burger' onClick={(event) => {
       event.stopPropagation() // avoid re-closing via listener above
-      setOpen(true)
+      setOpen(!open)
     }}>☰</div>
     <div className={classNames({ menu: true, open })}>
       <Link className='button' to='/recent'>Recent URLs</Link>

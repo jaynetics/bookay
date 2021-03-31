@@ -56,11 +56,11 @@ nav {
 .menu,
 .menu.open ~ .burger {
   background-color: #fff;
-  height: 100vh;
+  height: calc(100vh - 2.5em); /* nav height */
   margin: 0;
   position: fixed;
   right: 0;
-  top: 0;
+  top: 2.5em; /* nav height */
   transform: none;
   transition: all .2s ease;
 }
