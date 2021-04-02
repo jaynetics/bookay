@@ -10,12 +10,18 @@ export const FolderContent = ({ id }) => {
   // new folder opened => clear previous selections
   // NOTE: this makes cross-folder selections impossible on mobile
   useEffect(() => { setSelectedIds([]) }, [id, setSelectedIds])
+
   const name = useFolderName({ id })
   const { data, loading } =
     useAPI(client.getAll({ filter: { folderId: id } }), [id])
 
-  return <section className='folder-content scroll-section with-tree'>
-    <h2 className='headline'>{name}</h2>
+  // const [sorting, setSorting] = useState('TODO')
+
+  return <section className='folder-content scroll-section with-tree overflow-y-auto w-full h-full'>
+    <div className='flex'>
+      <h2 className='headline overflow-hidden'>{name}</h2>
+      A-Z
+    </div>
     <Content atRoot={!id} items={data} loading={loading} />
   </section>
 }

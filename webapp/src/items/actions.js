@@ -101,8 +101,8 @@ export const Divider = () =>
   <div className='button-divider'></div>
 
 const Button = ({ icon, text, func, disabled = false }) =>
-  <button disabled={disabled} onClick={(e) => !disabled && func(e)}>
-    <span className='button-icon'>{icon}</span>
+  <button className='block text-xl w-full' disabled={disabled} onClick={(e) => !disabled && func(e)}>
+    <span className='button-icon inline-block text-xl'>{icon}</span>
     {text}
   </button>
 

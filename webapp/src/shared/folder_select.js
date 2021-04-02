@@ -14,7 +14,7 @@ export const FolderSelect = ({
 }) => {
   const defaultOption = [rootLabel, null]
 
-  const { data } = useAPI(client.getAllFolders())
+  const { data, loading } = useAPI(client.getAllFolders())
   const validFolders = useMemo(() => {
     if (!data) return []
     if (blockedIds.length) return data.filter((f) => !blockedIds.includes(f.id))
@@ -24,7 +24,13 @@ export const FolderSelect = ({
     return Item.sort(validFolders).map((f) => [f.name, f.id])
   }, [validFolders])
 
-  return <div style={options.length === 0 && { visibility: 'hidden' }}>
+  // Prevent layout shift for default case (there are folders),
+  // but give up the space if there are none.
+  let style = {}
+  if (loading) style = { visibility: 'hidden' }
+  else if (options.length === 0) style = { display: 'none' }
+
+  return <div style={style}>
     <Form.Select
       options={[defaultOption, ...options]}
       name={name}
@@ -51,8 +57,8 @@ export const FolderBrowserModal = ({ folders, onSelect }) => {
   const subfolders = folders.filter((f) => f.folderId === folderId)
   const exit = () => route(`/${params.baseRoute}`)
 
-  return <section className='folder-content scroll-section modal'>
-    <h3 className='headline'>
+  return <section className='folder-content scroll-section modal overflow-y-auto w-full h-full'>
+    <h3 className='headline overflow-hidden'>
       Folder: {activeFolder ? truncate(activeFolder.name, 30) : 'root'}
     </h3>
 

@@ -8,6 +8,14 @@ module.exports = {
       }]
     ],
   },
+  style: {
+    postcss: {
+      plugins: [
+        require('tailwindcss'),
+        require('autoprefixer'),
+      ],
+    },
+  },
   webpack: {
     // support libs importing from react(-dom)
     alias: {

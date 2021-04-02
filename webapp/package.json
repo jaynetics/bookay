@@ -19,10 +19,16 @@
   "dependencies": {
     "@bookay/client": "../client",
     "@craco/craco": "^6.1.1",
+    "@fullhuman/postcss-purgecss": "^3.0.0",
+    "@tailwindcss/postcss7-compat": "^2.0.4",
+    "autoprefixer": "^9.8.6",
     "classnames": "^2.2.6",
     "performant-array-to-tree": "^1.7.1",
+    "postcss": "^7.0.35",
     "preact": "^10.5.13",
+    "purgecss-webpack-plugin": "^4.0.3",
     "react-scripts": "^4.0.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4",
     "wouter-preact": "^2.6.0"
   },
   "devDependencies": {

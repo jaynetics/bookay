@@ -9,10 +9,10 @@ export const FolderTree = ({ activeId }) => {
   const tree = useMemo(() => data && treeify(data), [data])
 
   return <section
-    className='folder-tree scroll-section'
+    className='folder-tree scoll-section w-full h-full'
     {...dropTargetBehavior({ item: { name: 'root folder', id: null } })}
   >
-    <h2 className='headline' onClick={() => route('/')}>Folders</h2>
+    <h2 className='headline overflow-hidden' onClick={() => route('/')}>Folders</h2>
     <Content activeId={activeId} tree={tree} />
   </section>
 }

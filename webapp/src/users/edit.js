@@ -7,7 +7,7 @@ export const EditUser = () => {
   const { user } = useContext(AppContext)
   if (!user) return null
 
-  return <section className='row'>
+  return <section className='row flex w-full'>
     <SettingsForm />
     <ChangePasswordForm />
     <DeleteAccountForm />

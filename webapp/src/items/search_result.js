@@ -7,8 +7,8 @@ export const SearchResult = () => {
   const { search: q } = useContext(AppContext)
   const { data } = useAPI(client.getAll({ filter: { q } }), [q])
 
-  return <section className='folder-content scroll-section'>
-    <h2 className='headline'>
+  return <section className='folder-content scoll-section w-full h-full'>
+    <h2 className='headline overflow-hidden'>
       {data ? `${data.length} results for ${q}` : 'Searching…'}
     </h2>
     <Content items={data} />

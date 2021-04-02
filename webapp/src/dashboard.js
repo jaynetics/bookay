@@ -4,7 +4,7 @@ import { FolderContent, FolderTree, MobileFolderSelect } from './dashboard/index
 export const Dashboard = ({ params }) => {
   const activeId = parseInt(params.id) || null
 
-  return <div className='dashboard'>
+  return <div className='dashboard flex flex-1 overflow-hidden'>
     <ForResolution above={684}>
       <FolderTree activeId={activeId} />
       <div className='folder-tree-border' />

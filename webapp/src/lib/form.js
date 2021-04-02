@@ -22,7 +22,7 @@ export const Form = ({
   submitting,
   values,
 }) =>
-  <form onSubmit={(e) => {
+  <form className='flex-1 h-full overflow-y-scroll p-6' onSubmit={(e) => { /* TODO: p-y-6 sm:p-x-6 min-w-full sm:min-w-0 */
     e.preventDefault()
     setSubmitting(true)
     setError(null)

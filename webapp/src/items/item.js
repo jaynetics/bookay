@@ -68,6 +68,7 @@ const Wrapper = ({ app, children, item }) =>
       item: true,
       cut: app.idsToCut.includes(item.id),
       selected: app.selectedIds.includes(item.id),
+      'text-xl': true,
     })}
     {...dragAndDropBehavior({ item, selectedIds: app.selectedIds })}
   >
@@ -96,7 +97,7 @@ const Body = ({
   }
 
   return <a
-    className={classNames({ 'item-body': true, active })}
+    className={classNames({ flex: true, 'item-body': true, active })}
     href={item.url || `/#/folders/${item.id}`}
     onClick={(event) => {
       // use href attribute if any new tab / window modifier is pressed
@@ -154,12 +155,13 @@ const Icon = ({ app, expandable, expanded, item, setExpanded, }) => {
     }
   }}>
     <div className={classNames({
+      'inline-block': true,
       'item-accessory': true,
       'item-expansion-toggle': expandable,
     })}>
       {accessory}
     </div>
-    <div className='item-icon' role='img' aria-label='Icon'>
+    <div className='inline-block item-icon' role='img' aria-label='Icon'>
       {item.type === 'folder' ?
         <FolderIcon /> :
         <URLIcon faviconSource={faviconSource} url={item.url} />}
@@ -203,10 +205,10 @@ const URLIcon = ({ faviconSource, url }) => {
 }
 
 const Name = ({ item }) =>
-  <div className='item-name'>{item.name}</div>
+  <div className='item-name overflow-hidden'>{item.name}</div>
 
 const Info = ({ item }) =>
-  <div className='item-info'>{item.info || item.url}</div>
+  <div className='item-info overflow-hidden text-lg'>{item.info || item.url}</div>
 
 const ItemMenuButton = ({ active, setMenuCoords }) => {
   // can not use css hover, as it is not cleared in some cases on touch devices

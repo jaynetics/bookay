@@ -6,8 +6,8 @@ export const RecentItems = () => {
     client.getAll({ filter: { type: 'url' }, sort: ['createdAt', 'DESC'] })
   )
 
-  return <section className='folder-content scroll-section'>
-    <h2 className='headline'>{data ? 'Recent bookmarks' : 'Loading…'}</h2>
+  return <section className='folder-content scoll-section w-full h-full'>
+    <h2 className='headline overflow-hidden'>{data ? 'Recent bookmarks' : 'Loading…'}</h2>
     {data ? <Item.List items={data} showMenuButton={true} /> : <Loader />}
   </section>
 }

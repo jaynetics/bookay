@@ -12,24 +12,24 @@ export const ItemHealth = () => {
   const { duplicates, emptyFolders, typeCounts } = data;
   [...duplicates, ...emptyFolders].forEach(i => i.customMenu = 'discardMenu')
 
-  return <section className='row'>
-    <div>
-      <h3>Stats</h3>
+  return <section className='row flex w-full'>
+    <div className='flex-1 p-6'> {/* TODO: p-y-6 sm:p-x-6 min-w-full sm:min-w-0 */}
+      <h3 className='overflow-hidden'>Stats</h3>
       {Object.entries(typeCounts).map(([type, cnt]) =>
         <p>{count(Item.typeName(type), cnt)}</p>)}
     </div>
-    <div>
-      <h3>Duplicates</h3>
+    <div className='flex-1 p-6'> {/* TODO: p-y-6 sm:p-x-6 min-w-full sm:min-w-0 */}
+      <h3 className='overflow-hidden'>Duplicates</h3>
       {duplicates.length ?
         <Item.List items={duplicates} showMenuButton={true} /> : <None />}
     </div>
-    <div>
-      <h3>Empty folders</h3>
+    <div className='flex-1 p-6'> {/* TODO: p-y-6 sm:p-x-6 min-w-full sm:min-w-0 */}
+      <h3 className='overflow-hidden'>Empty folders</h3>
       {emptyFolders.length ?
         <Item.List items={emptyFolders} showMenuButton={true} /> : <None />}
     </div>
-    <div className='broken-links'>
-      <h3>Broken Links</h3>
+    <div className='flex-1 p-6 broken-links'> {/* TODO: p-y-6 sm:p-x-6 min-w-full sm:min-w-0 */}
+      <h3 className='overflow-hidden'>Broken Links</h3>
       {scanBroken ?
         <BrokenBookmarksStream totalCount={typeCounts['url'] || 0} /> :
         <button onClick={() => setScanBroken(true)}>Scan now</button>}
@@ -60,9 +60,9 @@ class BrokenBookmarksStream extends Component {
     const { totalCount } = this.props
 
     if (checked < totalCount) {
-      return <div className='progress-bar'>
-        <div style={{ width: `${Math.round((checked / totalCount) * 100)}%` }}>
-          <p>Checked {checked} of {totalCount} ...</p>
+      return <div className='progress-bar w-full'>
+        <div className='h-full' style={{ width: `${Math.round((checked / totalCount) * 100)}%` }}>
+          <p className='overflow-visible'>Checked {checked} of {totalCount} ...</p>
         </div>
       </div>
     }
