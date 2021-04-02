@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { ForResolution } from './lib'
 import { FolderContent, FolderTree, MobileFolderSelect } from './dashboard/index'
 

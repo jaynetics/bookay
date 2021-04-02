@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { Loader, client, useAPI } from '../shared'
 import { Item } from './item'
 

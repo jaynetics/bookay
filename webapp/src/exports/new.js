@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { Form, useForm } from '../lib'
 import { FolderSelect, client } from '../shared'
 

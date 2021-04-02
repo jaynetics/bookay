@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../app/index'
 import { Loader, client, useAPI } from '../shared'

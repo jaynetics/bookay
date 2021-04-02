@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { useContext } from 'preact/hooks'
 import { ContextMenu } from '../lib'
 import { AppContext } from '../app/index'

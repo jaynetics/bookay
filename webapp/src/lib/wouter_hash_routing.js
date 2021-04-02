@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { useEffect, useCallback, useRef, useState } from 'preact/hooks'
 import { Link as WouterLink, Router, useRoute } from 'wouter-preact'
 import classNames from 'classnames'

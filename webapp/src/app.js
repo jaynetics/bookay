@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { useState, useCallback, useEffect } from 'preact/hooks'
 import { AppContext, GlobalFlashMessage, Nav, RouteSwitch } from './app/index'
 import { HashRouter } from './lib'
@@ -25,7 +23,7 @@ const App = () => {
     client.getUser().then(setUser).catch(() => 0)
   }, [setUser])
 
-  useEffect(loadUser, [])
+  useEffect(loadUser, [loadUser])
 
   return <AppContext.Provider value={{
     changesById, broadcastChange,

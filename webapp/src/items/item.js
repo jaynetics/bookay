@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { useState, useContext, useEffect } from 'preact/hooks'
 import classNames from 'classnames'
 import { ContextMenu, EventTestHelper, count, route, truncate } from '../lib'
@@ -181,7 +179,7 @@ const URLIcon = ({ faviconSource, url }) => {
   const [favicon, setFavicon] = useState(null)
   useEffect(() => {
     let parsed
-    try { parsed = new URL(url) } catch (e) { }
+    try { parsed = new URL(url) } catch (e) {}
     if (parsed && /^http/.test(parsed.protocol)) {
       const imagePreloader = new Image()
       imagePreloader.onload = () => setFavicon(imagePreloader.src)

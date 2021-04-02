@@ -1,5 +1,4 @@
-/** @jsx h */
-import { h, createRef } from 'preact'
+import { createRef } from 'preact'
 import { Form, flash, route, useForm } from '../lib'
 import { FolderSelect, client } from '../shared'
 

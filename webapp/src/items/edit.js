@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { Form, flash, route, useForm } from '../lib'
 import { FolderSelect, Loader, client, useAPI } from '../shared'
 import { Item } from './item'

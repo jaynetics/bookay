@@ -1,5 +1,4 @@
-/** @jsx h */
-import { Component, h } from 'preact'
+import { Component } from 'preact'
 import { count } from '../lib'
 import { client, useAPI, Loader } from '../shared'
 import { Item } from './item'

@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { copyToClipboard, flash, route } from '../lib'
 import { client } from '../shared'
 

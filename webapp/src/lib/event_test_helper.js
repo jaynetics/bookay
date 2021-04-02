@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { useMemo } from 'preact/hooks'
 
 // this allows testing events that are not fully supported in cypress

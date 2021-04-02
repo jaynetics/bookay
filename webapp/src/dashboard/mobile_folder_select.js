@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { route } from '../lib'
 import { FolderSelect } from '../shared'
 

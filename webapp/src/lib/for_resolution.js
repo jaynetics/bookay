@@ -1,5 +1,4 @@
-/** @jsx h */
-import { h, Fragment } from 'preact'
+import { Fragment } from 'preact'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 
 export const ForResolution = ({ above = 0, upto = Infinity, children }) => {

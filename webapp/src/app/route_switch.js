@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { Route, Switch } from 'wouter-preact'
 import { Dashboard } from '../dashboard'
 import { EditItem, ItemHealth, NewItem, RecentItems, SearchResult } from '../items'

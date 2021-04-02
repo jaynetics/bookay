@@ -7,17 +7,22 @@
   "repository": "https://github.com/jaynetics/bookay",
   "license": "MIT",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && ./scripts/sync-build.sh",
-    "test": "react-scripts test --watchAll=false",
-    "testw": "react-scripts test"
+    "start": "env FAST_REFRESH=false craco start",
+    "start:comment": "echo https://github.com/facebook/create-react-app/issues/9904",
+    "build": "craco build && ./scripts/sync-build.sh",
+    "test": "craco test --watchAll=false",
+    "testw": "craco test",
+    "prebuild": "./scripts/stub-react-version.sh",
+    "prestart": "./scripts/stub-react-version.sh",
+    "pretest": "./scripts/stub-react-version.sh"
   },
   "dependencies": {
     "@bookay/client": "../client",
+    "@craco/craco": "^6.1.1",
     "classnames": "^2.2.6",
     "performant-array-to-tree": "^1.7.1",
-    "preact": "^10.5.7",
-    "react-scripts": "^3.4.4",
+    "preact": "^10.5.13",
+    "react-scripts": "^4.0.3",
     "wouter-preact": "^2.6.0"
   },
   "devDependencies": {

@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 

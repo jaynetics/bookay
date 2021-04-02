@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { FlashMessage } from '../lib'
 
 export const GlobalFlashMessage = () =>

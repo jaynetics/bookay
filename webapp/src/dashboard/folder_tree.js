@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { arrayToTree } from 'performant-array-to-tree'
 import { Link, route } from '../lib'
 import { client, useAPI } from '../shared'

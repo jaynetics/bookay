@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { Form, flash, route, useForm } from '../lib'
 import { client } from '../shared'
 import { useContext } from 'preact/hooks'

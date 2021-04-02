@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { useMemo, useState } from 'preact/hooks'
 import { useRoute } from 'wouter-preact'
 import { Form, Link, currentLocation, route, truncate, useDidUpdateRoute } from '../lib'

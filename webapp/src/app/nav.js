@@ -1,5 +1,4 @@
-/** @jsx h */
-import { Fragment, createRef, h } from 'preact'
+import { Fragment, createRef } from 'preact'
 import { useEffect, useState, useContext } from 'preact/hooks'
 import { useRoute } from 'wouter-preact'
 import classNames from 'classnames'

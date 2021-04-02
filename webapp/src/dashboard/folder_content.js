@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact'
 import { useEffect, useContext, useState } from 'preact/hooks'
 import { Link } from '../lib'
 import { Loader, client, useAPI } from '../shared'
