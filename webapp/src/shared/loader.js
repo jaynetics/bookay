@@ -4,7 +4,7 @@ export const Loader = ({ active = true }) => {
   const [opacity, setOpacity] = useState(0)
 
   useEffect(() => {
-    if (!active) return
+    if (!active || opacity >= 1.0) return
     const fadeIn = setTimeout(() => setOpacity(opacity + 0.05), 200)
     return () => clearTimeout(fadeIn)
   }, [active, opacity])
