@@ -20,7 +20,7 @@
   "author": "Janosch Müller",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bcrypt": "^5.0.0",
     "bookmarks-parser": "^1.5.0",
     "cors": "^2.8.5",
