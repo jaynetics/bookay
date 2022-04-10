@@ -12,24 +12,33 @@
 
 <br>
 
-## Why?
+## Why
 
-- a bookmarking service is useful if you use varying browsers or devices
-- there is currently no free service that supports nested folders
-- self-hosting your bookmarks offers the best privacy
+- A bookmarking service is useful if you use varying browsers or devices
+
+- There is currently no free service that supports nested folders
+
+- Self - hosting your bookmarks offers the best privacy
 
 <br>
 
 ## Features
 
-- easily deployed [backend]
-- customizable, keyboard-friendly [browser plugin]
-- lightweight (~50 kB) [web app]
-- support for nested folders
-- data import and export
-- scan for dupes and broken links
-- support for multiple users per instance
-- responsiveness and dark mode
+- Customizable, keyboard-friendly **[Browser Plugin]**
+
+- Support for multiple users per instance
+
+- Lightweight ( `~50 kB` ) **[Web App]**
+
+- Scan for dupes and broken links
+
+- Responsiveness and dark mode
+
+- Support for nested folders
+
+- Easily deployed **[Backend]**
+
+- Data import and export
 
 ## Getting started
 
