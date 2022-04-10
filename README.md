@@ -1,8 +1,7 @@
-# bookay
+# bookay [![Badge Build]][Actions] [![Badge Heroku]][Heroku]
 
-[![Badge Build]][Actions]
+*A Tools For* ***Self-Hosting*** *Your* ***Bookmarks***
 
-bookay is a set of free, open-source tools for self-hosting your bookmarks.
 
   [![Showcase Preview]][Showcase]
 
@@ -27,7 +26,7 @@ bookay is a set of free, open-source tools for self-hosting your bookmarks.
 
 Deploy bookay as a free (hobby tier) app on Heroku:
 
-[![Badge Heroku]][Heroku]
+
 
 
 <!----------------------------------------------------------------------------->
