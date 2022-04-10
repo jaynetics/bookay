@@ -2,14 +2,23 @@
 
 *A Tools For* ***Self-Hosting*** *Your* ***Bookmarks***
 
+<br>
 
-  [![Showcase Preview]][Showcase]
+<div align = center>
+
+[![Showcase Preview]][Showcase]
+
+</div>
+
+<br>
 
 ## Why?
 
 - a bookmarking service is useful if you use varying browsers or devices
 - there is currently no free service that supports nested folders
 - self-hosting your bookmarks offers the best privacy
+
+<br>
 
 ## Features
 
@@ -29,10 +38,11 @@ Deploy bookay as a free (hobby tier) app on Heroku:
 
 
 
+
 <!----------------------------------------------------------------------------->
 
 [Actions]: https://github.com/jaynetics/bookay/actions
-[Heroku]: https://heroku.com/deploy?template=https://github.com/jaynetics/bookay
+[Heroku]: https://heroku.com/deploy?template=https://github.com/jaynetics/bookay 'Deploy Using The Free ( Hobby ) Tier On Heroku'
 
 
 <!----------------------------------{ Badges }--------------------------------->
