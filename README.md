@@ -1,13 +1,24 @@
-# bookay [![Badge Build]][Actions] [![Badge Heroku]][Heroku]
 
-*A Tools For* ***Self-Hosting*** *Your* ***Bookmarks***
-
-<br>
 <br>
 
 <div align = center>
 
-[![Showcase Preview]][Showcase]
+[![Badge Build]][Actions]   [![Badge Heroku]][Heroku]
+
+<br>
+
+# Bookay
+
+***Self-Host*** *your* ***Bookmarks***
+
+<br>
+<br>
+
+
+<img
+    src = 'https://user-images.githubusercontent.com/10758879/113178042-77350580-924e-11eb-820f-298da2a2631d.png'
+    width = 500
+/>
 
 </div>
 
@@ -21,6 +32,7 @@
 
 - Self - hosting your bookmarks offers the best privacy
 
+<br>
 <br>
 
 ## Features
@@ -41,12 +53,7 @@
 
 - Data import and export
 
-## Getting started
-
-Deploy bookay as a free (hobby tier) app on Heroku:
-
-
-
+<br>
 
 
 <!----------------------------------------------------------------------------->
@@ -54,21 +61,13 @@ Deploy bookay as a free (hobby tier) app on Heroku:
 [Actions]: https://github.com/jaynetics/bookay/actions
 [Heroku]: https://heroku.com/deploy?template=https://github.com/jaynetics/bookay 'Deploy Using The Free ( Hobby ) Tier On Heroku'
 
+[Browser Plugin]: plugin
+[Web App]: webapp
+[Backend]: server
 
-<!----------------------------------{ Badges }--------------------------------->
+
+<!---------------------------------[ Badges ]---------------------------------->
 
 [Badge Heroku]: https://www.herokucdn.com/deploy/button.svg
-[Badge Build]: https://github.com/jaynetics/bookay/workflows/tests/badge.svg
+[Badge Build]: https://img.shields.io/github/workflow/status/jaynetics/bookay/tests?style=for-the-badge&logoColor=white&logo=GitHub&labelColor=bf58ae&color=8c407f
 
-
-<!---------------------------------{ Folders }--------------------------------->
-
-[Backend]: server/
-[Browser Plugin]: plugin/
-[Web App]: webapp/
-
-
-<!-------------------------------{ Screenshots }------------------------------->
-
-[Showcase Preview]: https://user-images.githubusercontent.com/10758879/113178657-1528d000-924f-11eb-9a02-2c0e4e504074.png
-[Showcase]: https://user-images.githubusercontent.com/10758879/113178042-77350580-924e-11eb-820f-298da2a2631d.png
