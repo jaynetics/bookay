@@ -11,12 +11,12 @@ module.exports = {
     storage: path.resolve(__dirname, 'test_db.sqlite')
   },
   production:
-    // heroku with postgres addon
+    // heroku / fly.io with postgres
     process.env.DATABASE_URL && {
       dialectOptions: {
-        ssl: {
+        ssl: process.env.FLY_APP_NAME ? false : {
           require: true,
-          rejectUnauthorized: false
+          rejectUnauthorized: false // required setting for heroku
         }
       },
       logging: false,
@@ -28,7 +28,7 @@ module.exports = {
       ...JSON.parse(process.env.BOOKAY_DB_JSON)
     }
     || // config via url in env
-    {
+    process.env.BOOKAY_DB_URL && {
       logging: false,
       use_env_variable: 'BOOKAY_DB_URL'
     }

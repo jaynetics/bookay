@@ -27,8 +27,6 @@ bookay is a set of free, open-source tools for self-hosting your bookmarks.
 - support for multiple users per instance
 - responsiveness and dark mode
 
-## Quick start
+## Getting started
 
-Deploy bookay as a free (hobby tier) app on Heroku:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jaynetics/bookay)
+You need to run a bookay server to use bookay. It includes the webapp by default and also feeds the browser plugin. There are a few free hosting solutions that suffice to run the server. See [here](./server/README.md#how-to-use) for examples and deployment instructions.

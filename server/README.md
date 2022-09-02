@@ -6,26 +6,27 @@ This is a backend that stores your bookmarks in a database of your choice.
 
 Put it on a PAAS or any machine with Node and a database.
 
-### Example: deployment on the free tier of Heroku
+### Example: deployment on the free tier of fly.io
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jaynetics/bookay)
+First sign up with [fly.io](https://fly.io) and [install flyctl](https://fly.io/docs/hands-on/install-flyctl/).
 
-### Example: manual deployment on Heroku
+Then do this:
 
-1. [create an app on Heroku](https://heroku.com) - the free tier should do\*
-2. add `Heroku Postgres` in the app's `Resources` / `Addons` section
-3. [install the Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
-4. run the following in your terminal (replace <APP_NAME> with your app name)
-
-```sh
-heroku login
-curl -n -X POST 'https://api.heroku.com/apps/<APP_NAME>/builds' \
-  -d '{"source_blob":{"url":"https://github.com/jaynetics/bookay/archive/main.tar.gz"}}' \
-  -H 'Accept: application/vnd.heroku+json; version=3' \
-  -H 'Content-Type: application/json'
+```bash
+git clone https://github.com/jaynetics/bookay
+cd bookay
+BOOKAY_NAME=bookay$RANDOM # or any other unique name
+sed -i '' "s/bookay/$BOOKAY_NAME/" fly.toml
+fly auth login
+fly apps create $BOOKAY_NAME
+fly pg create --name $BOOKAY_NAME-db
+fly pg attach $BOOKAY_NAME-db
+fly launch
 ```
 
-\* It shuts down after 30 minutes, but needs just a few seconds to boot again. You can also install the browser plugin and use its keep-alive feature to keep the server ready while you are browsing.
+### Example: deployment on Heroku (no longer free after 11/2022)
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jaynetics/bookay)
 
 ### Custom deployment
 

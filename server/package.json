@@ -4,8 +4,9 @@
   "description": "backend and API for bookay bookmarks",
   "main": "server.js",
   "scripts": {
-    "postinstall": "sequelize-cli db:migrate",
-    "pretest": "rm -f ./config/test_db.sqlite && env NODE_ENV=test sequelize-cli db:migrate",
+    "migrate": "sequelize-cli db:migrate",
+    "postinstall": "[ $NODE_ENV = 'production' ] || npm run migrate",
+    "pretest": "rm -f ./config/test_db.sqlite && env NODE_ENV=test npm run migrate",
     "start": "node server.js",
     "start:integration": "npm run pretest && env NODE_ENV=test PORT=3033 node server.js",
     "test": "jest --runInBand",
@@ -21,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.2",
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "bookmarks-parser": "^1.5.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -29,11 +30,11 @@
     "heroku-ssl-redirect": "0.1.1",
     "pg": "^8.3.0",
     "sequelize": "^6.3.3",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "sqlite3": "^5.0.11"
   },
   "devDependencies": {
     "jest": "^26.6.3",
-    "sqlite3": "^5.0.3",
     "supertest": "^6.0.1"
   }
 }
