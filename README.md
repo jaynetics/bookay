@@ -7,7 +7,7 @@
 
 <br>
 
-# Bookay
+# bookay
 
 ***Self-Host*** *your* ***Bookmarks***
 
@@ -23,7 +23,7 @@
 <br>
 <br>
 
-The bookay server includes a webapp by default and also feeds the browser plugin. <br>
+The bookay server includes a webapp and also feeds the browser plugin. <br>
 There are a few free hosting solutions that suffice to run the server.
 
 **[Get Started]** with examples and deployment instructions.
@@ -39,7 +39,7 @@ There are a few free hosting solutions that suffice to run the server.
 
 - There is currently no free service that supports nested folders
 
-- Self - hosting your bookmarks offers the best privacy
+- Self-hosting your bookmarks offers the best privacy
 
 <br>
 <br>
