@@ -20,8 +20,17 @@
     width = 500
 />
 
+<br>
+<br>
+
+The bookay server includes a webapp by default and also feeds the browser plugin. <br>
+There are a few free hosting solutions that suffice to run the server.
+
+**[Get Started]** with examples and deployment instructions.
+
 </div>
 
+<br>
 <br>
 
 ## Why
@@ -62,6 +71,7 @@
 [Heroku]: https://heroku.com/deploy?template=https://github.com/jaynetics/bookay 'Deploy Using The Free ( Hobby ) Tier On Heroku'
 
 [Browser Plugin]: plugin
+[Get Started]: server/README.md#how-to-use
 [Web App]: webapp
 [Backend]: server
 
