@@ -1,5 +1,8 @@
 const { Item } = require('../models')
 
+// This endpoint is used by the browser plugin.
+// It returns bookmark information about the current URL,
+// plus some extra data such as recently added bookmarks.
 const show = async (req, res) => {
   const { params: { url }, query: { historySize, suggestSize } } = req
   const bookmark = await Item.findOne({ attributes: ['id'], where: { url } })
