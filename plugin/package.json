@@ -9,7 +9,7 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@bookay/client": "../client",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.3.0",
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "webpack": "5.11.0"
