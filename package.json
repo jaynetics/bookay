@@ -2,7 +2,7 @@
   "name": "@bookay/base",
   "description": "NOTE: this package.json is just an entrypoint for tests and deployment. For development, check subfolders.",
   "engines": {
-    "node": "^14.1"
+    "node": "^20.0"
   },
   "scripts": {
     "build": "npm-run-all build:*",

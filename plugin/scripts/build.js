@@ -21,7 +21,9 @@ const build = async () => {
 const transpileJS = async () => {
   console.log('transpiling browser extension js...')
 
-  fs.rmdirSync(buildDir, { recursive: true })
+  if (fs.existsSync(buildDir)) {
+    fs.rmSync(buildDir, { recursive: true })
+  }
 
   return new Promise((resolve) => {
     webpack(webpackConfig).run((err, stats) => {
@@ -31,7 +33,7 @@ const transpileJS = async () => {
       if (msgs.errors.length) { throw msgs.errors[0] }
       if (msgs.warnings.length) { throw msgs.warnings[0] }
 
-      resolve()
+      resolve(null)
     })
   })
 }
